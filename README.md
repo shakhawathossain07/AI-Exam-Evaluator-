@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4.1-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-2.39.0-3ECF8E?logo=supabase)](https://supabase.com/)
 
-> **🏆 Kiro Hackathon Winner** - A comprehensive AI-powered examination evaluation system with authentic Cambridge IGCSE question paper generation capabilities.
+> **🏆AI EXAM EVALUATOR - A comprehensive AI-powered examination evaluation system with authentic Cambridge IGCSE question paper generation capabilities.
 
 ## 📋 Table of Contents
 
