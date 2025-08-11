@@ -70,7 +70,7 @@ graph TB
         IGCSE[IGCSE Generator]
     end
     
-    subgraph "Business Logic Layer"
+    subgraph "Logic Layer"
         Eval[Exam Evaluator]
         QGen[Question Generator]
         PDF[PDF Generator]
