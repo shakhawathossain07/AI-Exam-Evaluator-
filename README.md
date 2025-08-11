@@ -62,11 +62,38 @@ The **AI Exam Evaluator** is a sophisticated web application that combines AI-po
 ## 🏗️ Architecture
 
 ```mermaid
-<img width="738" height="431" alt="Untitled Diagram drawio (3)" src="https://github.com/user-attachments/assets/d5f316af-1d8d-4040-80cf-16d0ad863e36" />
-
+graph TB
+    subgraph "User Interface Layer"
+        UI[React Components]
+        Nav[Navigation]
+        Dash[Dashboard]
+        IGCSE[IGCSE Generator]
+    end
+    
+    subgraph "Business Logic Layer"
+        Eval[Exam Evaluator]
+        QGen[Question Generator]
+        PDF[PDF Generator]
+        Auth[Authentication]
+    end
+    
+    subgraph "Data Layer"
+        Supabase[Supabase Database]
+        QBank[Question Banks]
+        Results[Evaluation Results]
+    end
+    
+    UI --> Eval
+    UI --> QGen
+    QGen --> PDF
+    Eval --> Supabase
+    QBank --> QGen
+    Results --> Supabase
 ```
 
-For detailed architecture documentation, see [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md).
+For detailed architecture documentation, see below:
+
+<img width="738" height="431" alt="Untitled Diagram drawio (3)" src="https://github.com/user-attachments/assets/55d81345-06ea-4a0d-adc1-f1fc4f8d29a5" />
 
 ## 🚀 Quick Start
 
