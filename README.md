@@ -94,7 +94,7 @@ graph TB
 For detailed architecture documentation, see below:
 
 <img width="738" height="431" alt="Untitled Diagram drawio (3)" src="https://github.com/user-attachments/assets/55d81345-06ea-4a0d-adc1-f1fc4f8d29a5" />
-
+Figure 2: System Architecture
 ## 🚀 Quick Start
 
 ### Prerequisites
