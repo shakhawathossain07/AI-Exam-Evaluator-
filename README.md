@@ -366,7 +366,6 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 🏆 Achievements
 
-- **🥇 Kiro Hackathon Winner** - Best use of spec-driven development
 - **📊 1000+ Questions** - Comprehensive Cambridge IGCSE question bank
 - **🎯 100% Authentic** - Papers indistinguishable from official Cambridge materials
 - **⚡ Sub-5s Generation** - Fast PDF creation with professional quality
