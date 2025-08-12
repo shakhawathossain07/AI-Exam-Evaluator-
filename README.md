@@ -61,6 +61,10 @@ The **AI Exam Evaluator** is a sophisticated web application that combines AI-po
 - **Mobile Responsive**: Works seamlessly across all devices
 - **Accessibility**: WCAG 2.1 AA compliant for inclusive access
 
+<img width="401" height="731" alt="Untitled Diagram drawio (5)" src="https://github.com/user-attachments/assets/d4c4b6d5-604f-4413-acb5-e5c33a2f85f3" />
+
+Figure 1: Workflow Diagram
+
 ## 🏗️ Architecture
 
 ```mermaid
@@ -96,7 +100,6 @@ graph TB
 For detailed architecture documentation, see below:
 
 <img width="733" height="440" alt="Untitled Diagram drawio (4)" src="https://github.com/user-attachments/assets/aae276cc-73e8-4787-8e6a-6df422dfdd3d" />
-
 
 Figure 2: System Architecture
 
