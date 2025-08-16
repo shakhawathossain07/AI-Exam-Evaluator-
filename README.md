@@ -416,7 +416,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - **Documentation**: Check our comprehensive docs
 - **Issues**: Report bugs via GitHub Issues
 - **Discussions**: Join GitHub Discussions for questions
-- **Email**: support@ai-exam-evaluator.com
+- **Email**: shakhawat.hossain07.edu@gmail.com
 
 ## 📄 License
 
