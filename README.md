@@ -426,8 +426,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Kiro IDE Team** - For the amazing development environment
 - **Cambridge International** - For examination standards reference
-- **Open Source Community** - For the incredible tools and libraries
-- **Contributors** - Everyone who helped make this project possible
 
 ---
 
