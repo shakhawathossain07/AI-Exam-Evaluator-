@@ -154,9 +154,9 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_APP_NAME=AI Exam Evaluator
 VITE_APP_VERSION=1.0.0
 
-# API Keys (Optional)
-VITE_OPENAI_API_KEY=your_openai_key
-VITE_ANTHROPIC_API_KEY=your_anthropic_key
+# API Keys 
+GEMINI_API_KEY=your_gemini_key
+
 ```
 
 ## � Cambridge IGCSE Generator
@@ -230,15 +230,15 @@ const pdfBlob = generator.getBlob();
 ```
 ai-exam-evaluator/
 ├── .kiro/                          # Kiro IDE Configuration
-│   ├── specs/cambridge-igcse-generator/
+│   ├── specs/
 │   │   ├── requirements.md         # Feature requirements
 │   │   ├── design.md              # System design
 │   │   └── tasks.md               # Implementation tasks
 │   ├── steering/                   # Development guidelines
-│   │   ├── cambridge-standards.md # Cambridge standards
-│   │   └── development-standards.md # Code standards
+│   │   ├──  
+│   │   └── 
 │   └── hooks/                      # Automation hooks
-│       └── test-on-save.md        # Test automation
+│       └── 
 ├── src/
 │   ├── components/
 │   │   ├── igcse/                 # IGCSE Generator
@@ -331,7 +331,7 @@ This project showcases advanced Kiro IDE features:
 ### 📊 Project Structure
 ```
 .kiro/
-├── specs/cambridge-igcse-generator/    # Feature specifications
+├── specs/   # Feature specifications
 ├── steering/                           # Development guidelines
 └── hooks/                             # Automation workflows
 ```
