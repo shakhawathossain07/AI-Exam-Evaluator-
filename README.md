@@ -7,9 +7,10 @@
 [![Supabase](https://img.shields.io/badge/Supabase-2.39.0-3ECF8E?logo=supabase)](https://supabase.com/)
 
 > **🏆AI EXAM EVALUATOR - A comprehensive AI-powered examination evaluation system with authentic Cambridge IGCSE question paper generation capabilities.
-<img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/fd4c9daf-fd74-499a-8e2d-0ffdc12566f6" />
+<img width="947" height="416" alt="AI EXAM EVALUATOR" src="https://github.com/user-attachments/assets/f1bdd044-a3ba-4f2f-8d2e-fb48930cd89c" />
 
-🔗 **Live Project:** [aiexamevaluator.netlify.app](https://aiexamevaluator.netlify.app/)
+
+🔗 **Live Project:** [Ai Exam Evaluator App](https://aiexamevaluator.me/)
 
 ## 📋 Table of Contents
 
