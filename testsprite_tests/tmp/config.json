@@ -1,0 +1,28 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5173",
+  "executionArgs": {
+    "projectName": "ai-exam-evaluator",
+    "projectPath": "Y:\\Kiro Hackathon\\AI Exam Evaluator KIRO Question Paper v2\\AI Exam Evaluator",
+    "testIds": [
+      "TC001",
+      "TC002",
+      "TC003",
+      "TC004",
+      "TC005",
+      "TC006",
+      "TC007",
+      "TC008",
+      "TC009",
+      "TC010",
+      "TC011",
+      "TC012"
+    ],
+    "additionalInstruction": "Test the AI Exam Evaluator application after applying critical security fixes:\n\nFIXES APPLIED:\n1. ✅ X-Frame-Options removed from development mode (was causing all test failures)\n2. ✅ Security headers now properly set via HTTP middleware instead of meta tags\n3. ✅ WebSocket configuration fixed for HMR connections\n4. ✅ CORS made more permissive for testing (localhost, 127.0.0.1 allowed)\n5. ✅ CSP updated to allow unsafe-inline and unsafe-eval for development\n\nEXPECTED IMPROVEMENTS:\n- Application should load without X-Frame-Options errors\n- WebSocket connections should work properly\n- All UI components should render correctly\n- Authentication flows should be testable\n- File upload and PDF processing should function\n\nFocus on verifying that the critical blocking issues have been resolved and the application is now functional for testing.",
+    "envs": {
+      "API_KEY": "sk-user-FpyS82GLTwxyRqPllyaB2yQeSCYpYZgWQwxcrvzrHElNGzgQHFalRxLqKftA0d0nFqzia_maY6aS056Ws3__lTzuDkR4qKn-BzQpNCPnFqr9LAlD4LCX4VbljccBH6wYfO8"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "projectName": "AI Exam Evaluator",
+  "baseUrl": "http://localhost:5173",
+  "testCredentials": {
+    "admin": {
+      "email": "admin@testsprite.com",
+      "password": "TestSprite123!"
+    },
+    "user": {
+      "email": "user@testsprite.com", 
+      "password": "TestSprite123!"
+    }
+  },
+  "testSettings": {
+    "timeout": 30000,
+    "retries": 2,
+    "headless": false,
+    "slowMo": 100
+  },
+  "features": {
+    "authentication": true,
+    "fileUpload": true,
+    "aiEvaluation": true,
+    "pdfProcessing": true,
+    "igcseGenerator": true,
+    "resultsManagement": true,
+    "adminDashboard": true,
+    "draftManagement": true
+  }
+}

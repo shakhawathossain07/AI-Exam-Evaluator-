@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Automated Test Runner",
+  "description": "Automatically runs relevant tests when source code files are modified. Executes unit tests, integration tests, and type checking to ensure code quality and prevent regressions. Provides immediate feedback on test results and coverage.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.test.ts",
+      "src/**/*.test.tsx",
+      "src/**/*.spec.ts",
+      "src/**/*.spec.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A source code file has been modified. Please run the appropriate tests to ensure the changes don't break existing functionality:\n\n1. **Identify Test Scope**: Determine which tests are relevant to the modified files\n2. **Run Unit Tests**: Execute unit tests for the modified components/services\n3. **Run Integration Tests**: If applicable, run integration tests that cover the modified functionality\n4. **Type Checking**: Run TypeScript compiler to check for type errors\n5. **Test Coverage**: Analyze test coverage for the modified code\n\nFor each test run, provide:\n- Test execution results (pass/fail counts)\n- Any failing test details with error messages\n- Coverage information for modified files\n- Recommendations for additional tests if coverage is low\n- Suggestions for fixing any failing tests\n\nUse the following commands as appropriate:\n- `npm test` for running all tests\n- `npm run test:unit` for unit tests only\n- `npm run test:integration` for integration tests\n- `npm run type-check` for TypeScript checking\n- `npm run test:coverage` for coverage analysis\n\nFocus on providing actionable feedback to maintain code quality."
+  }
+}

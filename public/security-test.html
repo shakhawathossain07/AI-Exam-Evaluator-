@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Headers Test</title>
+</head>
+<body>
+    <h1>Security Headers Test</h1>
+    <p>This page tests if security headers are properly configured.</p>
+    
+    <script>
+        // Test script execution
+        console.log('Script execution test - PASSED');
+        
+        // Check for security headers in browser
+        fetch(window.location.href)
+            .then(response => {
+                console.log('Security Headers Check:');
+                console.log('X-Frame-Options:', response.headers.get('X-Frame-Options'));
+                console.log('X-Content-Type-Options:', response.headers.get('X-Content-Type-Options'));
+                console.log('X-XSS-Protection:', response.headers.get('X-XSS-Protection'));
+                console.log('Referrer-Policy:', response.headers.get('Referrer-Policy'));
+                console.log('Content-Security-Policy:', response.headers.get('Content-Security-Policy'));
+                
+                // Display results on page
+                const results = document.getElementById('results');
+                results.innerHTML = `
+                    <h2>Header Test Results:</h2>
+                    <ul>
+                        <li>X-Frame-Options: ${response.headers.get('X-Frame-Options') || 'NOT SET'}</li>
+                        <li>X-Content-Type-Options: ${response.headers.get('X-Content-Type-Options') || 'NOT SET'}</li>
+                        <li>X-XSS-Protection: ${response.headers.get('X-XSS-Protection') || 'NOT SET'}</li>
+                        <li>Referrer-Policy: ${response.headers.get('Referrer-Policy') || 'NOT SET'}</li>
+                        <li>CSP: ${response.headers.get('Content-Security-Policy') ? 'SET' : 'NOT SET'}</li>
+                    </ul>
+                `;
+            })
+            .catch(error => {
+                console.error('Error checking headers:', error);
+            });
+    </script>
+    
+    <div id="results">Loading header test results...</div>
+</body>
+</html>

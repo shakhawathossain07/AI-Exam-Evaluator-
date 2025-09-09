@@ -1,0 +1,474 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Registration and Login with Role-Based Access",
+    "description": "Verify that users can register and login successfully with correct credentials and role-based access control is enforced.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to user registration page"
+      },
+      {
+        "type": "action",
+        "description": "Register a new user with valid email, password, and role (examiner or admin)"
+      },
+      {
+        "type": "assertion",
+        "description": "Check registration is successful and user receives confirmation"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to login page"
+      },
+      {
+        "type": "action",
+        "description": "Input registered email and password"
+      },
+      {
+        "type": "action",
+        "description": "Click login button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify successful login and access assigned according to user role"
+      },
+      {
+        "type": "action",
+        "description": "Attempt access to restricted admin-only features with examiner role"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm access is denied due to insufficient permissions"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "File Upload Validation and Preview",
+    "description": "Ensure the multi-file upload system accepts valid PDF and image files with proper validation and preview before submission.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to file upload interface"
+      },
+      {
+        "type": "action",
+        "description": "Select multiple valid PDF and image files"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify files are accepted and previews are displayed correctly"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to upload unsupported file types (e.g., .exe, .txt)"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that unsupported files are rejected and user receives an error message"
+      },
+      {
+        "type": "action",
+        "description": "Upload a large PDF file (> max allowed size)"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm upload is blocked with appropriate error indicating file size limit"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "AI Exam Evaluation Accuracy with Uploaded Files",
+    "description": "Validate that the AI Exam Evaluator correctly processes uploaded exam papers and mark schemes to generate accurate evaluation results.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Upload a valid exam paper PDF and corresponding mark scheme"
+      },
+      {
+        "type": "action",
+        "description": "Trigger AI evaluation process"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify evaluation completes without errors and results are generated"
+      },
+      {
+        "type": "assertion",
+        "description": "Check evaluation results against expected scoring outputs for correctness"
+      },
+      {
+        "type": "action",
+        "description": "Upload mismatched mark scheme for the exam paper"
+      },
+      {
+        "type": "action",
+        "description": "Trigger AI evaluation process"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate system flags inconsistency or error in evaluation results"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Interactive PDF Viewer Operation and Navigation",
+    "description": "Test the PDF viewer’s ability to process pages, extract questions, and allow smooth navigation through exam papers.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load an uploaded exam PDF into the interactive PDF viewer"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm all pages load correctly with no rendering errors"
+      },
+      {
+        "type": "action",
+        "description": "Navigate page-by-page using viewer controls"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify fast and accurate page rendering upon navigation"
+      },
+      {
+        "type": "action",
+        "description": "Use question extraction feature to highlight all questions on each page"
+      },
+      {
+        "type": "assertion",
+        "description": "Check extracted questions correspond correctly to the paper content"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "IGCSE Question Paper Generation and PDF Export",
+    "description": "Ensure the IGCSE exam paper generator produces valid, correctly formatted exam papers with multiple paper types and allows PDF export.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open IGCSE question paper generator"
+      },
+      {
+        "type": "action",
+        "description": "Select paper type (e.g., Paper 1 MCQ, Paper 2 Core) and configure settings"
+      },
+      {
+        "type": "action",
+        "description": "Generate the exam paper"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the generated paper content matches selected configuration and exam blueprint"
+      },
+      {
+        "type": "action",
+        "description": "Export the paper as PDF"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm PDF is valid, opens correctly, and formatting is consistent"
+      },
+      {
+        "type": "action",
+        "description": "Repeat paper generation with invalid or missing configuration"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify system either prevents generation or shows descriptive validation errors"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Results Management: History Tracking, Search, Filter, and Export",
+    "description": "Validate that evaluation histories are recorded accurately, searchable, filterable, and exportable as needed.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Perform multiple exam evaluations with different parameters"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to results history page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm all previous evaluations appear with correct metadata"
+      },
+      {
+        "type": "action",
+        "description": "Use search with keywords matching evaluations"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify search results update correctly and relevant records are shown"
+      },
+      {
+        "type": "action",
+        "description": "Apply filters by exam type, date range, or score thresholds"
+      },
+      {
+        "type": "assertion",
+        "description": "Check filtered results meet criteria accurately"
+      },
+      {
+        "type": "action",
+        "description": "Export filtered evaluation results to CSV or PDF format"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm exported files contain correct and complete evaluation data"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Analytics Dashboard Data Accuracy and Update Frequency",
+    "description": "Test that the analytics dashboard displays correct usage statistics, evaluation metrics, and administrative reports with up-to-date data.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Generate multiple exam evaluations with different users and exam types"
+      },
+      {
+        "type": "action",
+        "description": "Access the analytics dashboard as an admin user"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify usage statistics reflect the number of evaluations and user activity"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm evaluation performance metrics correspond to generated results"
+      },
+      {
+        "type": "action",
+        "description": "Wait for time period (e.g., 5 minutes) and repeat an evaluation"
+      },
+      {
+        "type": "action",
+        "description": "Refresh analytics dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that new data is reflected without delay or caching errors"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Draft Auto-Save and Recovery Under Various Usage Scenarios",
+    "description": "Verify that ongoing evaluation work is automatically saved and that drafts can be reliably recovered after interruptions.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Start a new exam evaluation and input partial data"
+      },
+      {
+        "type": "action",
+        "description": "Wait for auto-save interval or trigger manual save"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify draft is saved locally or remotely without errors"
+      },
+      {
+        "type": "action",
+        "description": "Close browser or tab unexpectedly"
+      },
+      {
+        "type": "action",
+        "description": "Reopen application and navigate to draft recovery"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the saved draft is available and data is intact"
+      },
+      {
+        "type": "action",
+        "description": "Corrupt the draft data (simulate incomplete or malformed draft)"
+      },
+      {
+        "type": "assertion",
+        "description": "Check system handles corrupted drafts gracefully showing error and fallback options"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "UI Components Responsiveness and Interaction",
+    "description": "Test the responsiveness of UI components such as tab navigation, dashboards, settings, and verify correct feedback on user interactions.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Resize the application window across various screen sizes (mobile, tablet, desktop)"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI components adjust layout and remain usable"
+      },
+      {
+        "type": "action",
+        "description": "Navigate through tabs including dashboard, settings, and evaluation pages"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm correct page updates and highlighting of active tabs"
+      },
+      {
+        "type": "action",
+        "description": "Trigger loading states on pages with simulated delays"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that loading spinners and placeholders display correctly"
+      },
+      {
+        "type": "action",
+        "description": "Trigger error states (e.g., failed API calls)"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure error messages and retry options are presented to users"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Security Measures: Rate Limiting and Unauthorized Access Prevention",
+    "description": "Confirm security features effectively prevent unauthorized access, enforce role permissions, and handle rate limiting.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt to access admin-only endpoints as an unauthenticated user"
+      },
+      {
+        "type": "assertion",
+        "description": "Check request is denied with appropriate HTTP status and message"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to access admin-only features logged in as examiner role"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is blocked and user receives permission error"
+      },
+      {
+        "type": "action",
+        "description": "Send rapid successive API requests to evaluation endpoints exceeding rate limits"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure further requests are throttled or rejected with rate limit error"
+      },
+      {
+        "type": "action",
+        "description": "Test session expiration and token invalidation"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm users are logged out or forced to re-authenticate when session expires"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Performance Benchmarking: Load Times and Responsiveness",
+    "description": "Ensure the application meets acceptable performance thresholds for load times and responsiveness across core functionalities.",
+    "category": "performance",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Measure initial application load time on standard network conditions"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify load time is within acceptable limits (e.g., under 3 seconds)"
+      },
+      {
+        "type": "action",
+        "description": "Navigate through major features including file upload, evaluation, and results history"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure page transitions and data loads occur with minimal delay"
+      },
+      {
+        "type": "action",
+        "description": "Perform AI evaluation with large exam papers"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm evaluation process runs efficiently without significant UI blocking or timeout"
+      },
+      {
+        "type": "action",
+        "description": "Simulate service worker caching and offline behavior"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify performance optimizations activate correctly and app remains responsive"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Comprehensive Automated Test Suite Execution",
+    "description": "Run the entire automated test suite including unit, integration, and component tests to verify no regressions or failures exist.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Execute all unit tests for core components and hooks"
+      },
+      {
+        "type": "assertion",
+        "description": "All unit tests pass with no errors"
+      },
+      {
+        "type": "action",
+        "description": "Run integration tests covering file upload, AI evaluation, and results management flows"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm integration tests complete successfully and validate expected outcomes"
+      },
+      {
+        "type": "action",
+        "description": "Execute component tests verifying UI behavior and state management"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify component tests pass and no console errors or warnings occur"
+      }
+    ]
+  }
+]

@@ -1,0 +1,111 @@
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// Security headers configuration for development server
+const SECURITY_HEADERS = {
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+  'X-XSS-Protection': '1; mode=block',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Cross-Origin-Embedder-Policy': 'credentialless',
+  'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+  'Content-Security-Policy': `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: blob: https: http:;
+    font-src 'self' https://fonts.gstatic.com data:;
+    connect-src 'self' https://generativelanguage.googleapis.com https://*.supabase.co https://api.gemini.google.com wss://*.supabase.co;
+    media-src 'self' blob: data:;
+    object-src 'none';
+    frame-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    upgrade-insecure-requests;
+  `.replace(/\s+/g, ' ').trim()
+} as const;
+
+// Default development port
+const DEFAULT_DEV_PORT = 5173;
+
+// Production build configuration factory
+const getProductionBuildConfig = (isProduction: boolean) => {
+  if (!isProduction) return {};
+  
+  return {
+    // Production security settings - maximum obfuscation
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove all console statements
+        drop_debugger: true, // Remove debugger statements
+        dead_code: true, // Remove unreachable code
+        passes: 2, // Multiple compression passes
+      },
+      mangle: {
+        toplevel: true, // Mangle top-level variable names
+      },
+      format: {
+        comments: false, // Remove all comments
+        beautify: false, // Minimize whitespace
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Single chunk for better obfuscation
+        entryFileNames: '[hash].js', // Obfuscated filenames
+        chunkFileNames: '[hash].js',
+        assetFileNames: '[hash].[ext]',
+      },
+    },
+  };
+};
+
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const isProduction = mode === 'production';
+  
+  return {
+    plugins: [react()],
+    server: {
+      host: true,
+      port: parseInt(env.VITE_DEV_PORT || String(DEFAULT_DEV_PORT)),
+      strictPort: true,
+      open: false,
+      // Configure security headers properly via HTTP response headers
+      headers: SECURITY_HEADERS,
+      // CORS configuration for TestSprite compliance
+      cors: {
+        origin: ['http://localhost:3000', 'http://localhost:5173', 'https://aiexamevaluator.me'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+        credentials: true
+      },
+      // Additional security configurations
+      fs: {
+        strict: true,
+        allow: ['..']
+      }
+    },
+    optimizeDeps: {
+      exclude: ['lucide-react'],
+      include: ['pdfjs-dist'],
+    },
+    define: {
+      global: 'globalThis',
+    },
+    build: {
+      commonjsOptions: {
+        include: [/pdfjs-dist/, /node_modules/],
+      },
+      // Environment-specific build settings
+      minify: isProduction ? 'terser' : false,
+      sourcemap: !isProduction,
+      reportCompressedSize: isProduction,
+      // Production-specific optimizations
+      ...getProductionBuildConfig(isProduction),
+    },
+    assetsInclude: ['**/*.pdf'],
+  };
+});
