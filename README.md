@@ -311,9 +311,14 @@ npm run deploy:production # Deploy to production
    - Staging environment for testing
    - Production deployment with monitoring
   
-<img width="401" height="731" alt="Untitled Diagram drawio (5)" src="https://github.com/user-attachments/assets/d4c4b6d5-604f-4413-acb5-e5c33a2f85f3" />
+## Workflow Diagram  
 
-Figure 2: Workflow Diagram
+<p align="center">  
+  <img src="https://github.com/user-attachments/assets/d4c4b6d5-604f-4413-acb5-e5c33a2f85f3" alt="Workflow Diagram" width="50%" />  
+</p>  
+
+<p align="center"><i>Figure 2: Workflow Diagram</i></p>  
+
 
 ## 🎯 Kiro IDE Integration
 
