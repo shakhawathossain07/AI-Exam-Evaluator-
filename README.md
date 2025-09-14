@@ -100,11 +100,13 @@ graph TB
     Results --> Supabase
 ```
 
-For detailed architecture documentation, see below:
+For detailed architecture diagram, see below:
 
-<img width="733" height="440" alt="Untitled Diagram drawio (4)" src="https://github.com/user-attachments/assets/aae276cc-73e8-4787-8e6a-6df422dfdd3d" />
+<p align="center">  
+  <img src="https://github.com/user-attachments/assets/aae276cc-73e8-4787-8e6a-6df422dfdd3d" alt="System Architecture Diagram" width="80%" />  
+</p>  
 
-Figure 1: System Architecture
+<p align="center"><i>Figure 1: System Architecture</i></p>  
 
 ## 🚀 Quick Start
 
