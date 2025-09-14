@@ -65,8 +65,7 @@ The **AI Exam Evaluator** is a sophisticated web application that combines AI-po
   
 ## Video Demo
 
-[![Watch Demo](https://img.youtube.com/vi/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP/0.jpg)](https://youtu.be/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP)
-
+<p align="center"> <a href="https://youtu.be/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP" target="_blank"> <img src="https://github.com/user-attachments/assets/eb4432d7-8766-4977-b1bf-384d810a9503" alt="Project Demo Thumbnail" width="80%" /> </a> </p> <p align="center"> 👉 <a href="https://youtu.be/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP" target="_blank"><b>Watch the Full Demo on YouTube</b></a> </p>
 
 
 ## 🏗️ Architecture
