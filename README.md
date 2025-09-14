@@ -62,9 +62,12 @@ The **AI Exam Evaluator** is a sophisticated web application that combines AI-po
 - **Mobile Responsive**: Works seamlessly across all devices
 - **Accessibility**: WCAG 2.1 AA compliant for inclusive access
 
-<img width="401" height="731" alt="Untitled Diagram drawio (5)" src="https://github.com/user-attachments/assets/d4c4b6d5-604f-4413-acb5-e5c33a2f85f3" />
+  
+## Video Demo
 
-Figure 1: Workflow Diagram
+[![Watch Demo](https://img.youtube.com/vi/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP/0.jpg)](https://youtu.be/7n9bQw8xM5s?si=EnMxOTY7AfL1dVqP)
+
+
 
 ## 🏗️ Architecture
 
@@ -102,7 +105,7 @@ For detailed architecture documentation, see below:
 
 <img width="733" height="440" alt="Untitled Diagram drawio (4)" src="https://github.com/user-attachments/assets/aae276cc-73e8-4787-8e6a-6df422dfdd3d" />
 
-Figure 2: System Architecture
+Figure 1: System Architecture
 
 ## 🚀 Quick Start
 
@@ -308,6 +311,10 @@ npm run deploy:production # Deploy to production
    - Automatic deployment via GitHub Actions
    - Staging environment for testing
    - Production deployment with monitoring
+  
+<img width="401" height="731" alt="Untitled Diagram drawio (5)" src="https://github.com/user-attachments/assets/d4c4b6d5-604f-4413-acb5-e5c33a2f85f3" />
+
+Figure 2: Workflow Diagram
 
 ## 🎯 Kiro IDE Integration
 
