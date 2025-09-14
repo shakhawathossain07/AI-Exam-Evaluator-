@@ -120,8 +120,8 @@ For detailed architecture diagram, see below:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ai-exam-evaluator.git
-   cd ai-exam-evaluator
+   git clone https://github.com/yourusername/AI-Exam-Evaluator-.git
+   cd AI-Exam-Evaluator-
    ```
 
 2. **Install dependencies**
@@ -233,16 +233,24 @@ const pdfBlob = generator.getBlob();
 
 ```
 ai-exam-evaluator/
-├── .kiro/                          # Kiro IDE Configuration
+├── .kiro/                         # Kiro IDE Configuration
 │   ├── specs/
-│   │   ├── requirements.md         # Feature requirements
+│   │   ├── requirements.md        # Feature requirements
 │   │   ├── design.md              # System design
 │   │   └── tasks.md               # Implementation tasks
-│   ├── steering/                   # Development guidelines
-│   │   ├──  
-│   │   └── 
+│   ├── steering/                  # Development guidelines
+│   │   ├──  ai-integration
+|   |   ├── performance-optimization
+|   |   ├── product
+|   |   ├── security-guidelines
+|   |   ├── structure
+|   |   ├── tech
+│   │   └── testing-standards
 │   └── hooks/                      # Automation hooks
-│       └── 
+│       └── code-quality-analyzer.kiro.hook
+|       ├── documentation-updater.kiro.hook
+|       ├── security-scanner.kiro.hook
+|       └── test-runner.kiro.hook
 ├── src/
 │   ├── components/
 │   │   ├── igcse/                 # IGCSE Generator
@@ -340,14 +348,6 @@ This project showcases advanced Kiro IDE features:
 - **Test on Save**: Automatically runs tests when files are modified
 - **Quality Gates**: Prevents deployment of non-compliant code
 - **Continuous Validation**: Real-time feedback during development
-
-### 📊 Project Structure
-```
-.kiro/
-├── specs/   # Feature specifications
-├── steering/                           # Development guidelines
-└── hooks/                             # Automation workflows
-```
 
 ## 📖 Documentation
 
