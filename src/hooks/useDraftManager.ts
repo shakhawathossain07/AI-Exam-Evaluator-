@@ -70,7 +70,6 @@ export function useDraftManager() {
     
     try {
       const draftData = JSON.parse(draft);
-      setHasDraft(false);
       return draftData;
     } catch (error) {
       console.error('Failed to load draft:', error);
