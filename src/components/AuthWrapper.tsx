@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { supabase, getSiteUrl } from '../lib/supabase'
+import { supabase, getSiteUrl, isMissingEnvVars } from '../lib/supabase'
 import { User } from '@supabase/supabase-js'
 import { motion } from 'framer-motion'
-import { LogIn, UserPlus, Brain, Shield, AlertTriangle, FileText, BarChart3, Clock, Play } from 'lucide-react'
+import { LogIn, UserPlus, Brain, Shield, AlertTriangle, FileText, BarChart3, Clock, Play, AlertCircle } from 'lucide-react'
 import { AdminLogin } from './AdminLogin'
 import { AdminDashboard } from './AdminDashboard'
 import { setupDefaultAdmin } from '../services/api'
@@ -139,6 +139,40 @@ function SupabaseSetupWarning() {
     supabaseKey.includes('your-anon-key')
 
   if (!needsSetup) return null
+
+  // If completely missing, show full-page error
+  if (!supabaseUrl || !supabaseKey) {
+    return (
+      <div className="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-lg w-full bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-red-500/30 p-8 text-center"
+        >
+          <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <AlertCircle className="w-8 h-8 text-red-400" />
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-4">Configuration Error</h1>
+          <p className="text-slate-400 mb-6">
+            The application is missing required environment variables. Please ensure the following are configured in your Netlify dashboard:
+          </p>
+          <div className="bg-slate-800/50 rounded-xl p-4 text-left mb-6">
+            <code className="text-sm">
+              <div className={`mb-2 ${supabaseUrl ? 'text-green-400' : 'text-red-400'}`}>
+                VITE_SUPABASE_URL: {supabaseUrl ? '✓ Set' : '✗ Missing'}
+              </div>
+              <div className={supabaseKey ? 'text-green-400' : 'text-red-400'}>
+                VITE_SUPABASE_ANON_KEY: {supabaseKey ? '✓ Set' : '✗ Missing'}
+              </div>
+            </code>
+          </div>
+          <p className="text-slate-500 text-sm">
+            After adding the variables, trigger a new deploy in Netlify.
+          </p>
+        </motion.div>
+      </div>
+    )
+  }
 
   return (
     <motion.div

@@ -1,7 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
 // Export the site URL for use in auth functions
 export const getSiteUrl = () => {
@@ -19,17 +19,28 @@ export const getSiteUrl = () => {
   return 'http://localhost:3000'
 }
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+// Check for missing environment variables and show helpful error
+export const isMissingEnvVars = !supabaseUrl || !supabaseAnonKey
+
+if (isMissingEnvVars) {
+  console.error('Missing Supabase environment variables:', {
+    VITE_SUPABASE_URL: supabaseUrl ? 'set' : 'MISSING',
+    VITE_SUPABASE_ANON_KEY: supabaseAnonKey ? 'set' : 'MISSING'
+  })
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: true
+// Create client even with empty strings to prevent crash - auth will fail gracefully
+export const supabase: SupabaseClient = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder-key',
+  {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
   }
-})
+)
 
 export type Database = {
   public: {
