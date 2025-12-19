@@ -1,0 +1,46 @@
+# Netlify Deployment Configuration
+
+[build]
+  # Directory with the static site files
+  publish = "dist"
+  
+  # Build command
+  command = "npm run build"
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+  
+  # Enable Netlify Functions
+  NETLIFY_FUNCTIONS_DIRECTORY = "netlify/functions"
+
+# Headers for security and performance - PDF viewing optimized
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com blob: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: http:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://generativelanguage.googleapis.com https://*.supabase.co https://api.gemini.google.com wss://*.supabase.co; media-src 'self' blob: data:; object-src 'none'; frame-src 'self' blob: data:; base-uri 'self'; form-action 'self';"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# SPA redirect rules
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# API proxy for CORS issues (if needed)
+[[redirects]]
+  from = "/api/*"
+  to = "https://agpsxkxpimtuqlwqqeby.supabase.co/:splat"
+  status = 200
+  force = false

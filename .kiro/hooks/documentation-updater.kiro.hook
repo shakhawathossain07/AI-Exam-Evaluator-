@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "name": "Documentation Auto-Updater",
+  "description": "Automatically updates documentation when code changes are made. Maintains API documentation, component documentation, and README files to ensure they stay current with code changes.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/services/**/*.ts",
+      "src/components/**/*.tsx",
+      "src/hooks/**/*.ts",
+      "src/utils/**/*.ts",
+      "src/types/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Code files have been modified that may require documentation updates. Please review and update relevant documentation:\n\n1. **API Documentation**:\n   - Update service method documentation if APIs changed\n   - Ensure parameter types and return values are documented\n   - Add examples for new or modified endpoints\n   - Update error handling documentation\n\n2. **Component Documentation**:\n   - Update component prop interfaces and descriptions\n   - Document new component features or behavior changes\n   - Add usage examples for modified components\n   - Update component stories or examples if they exist\n\n3. **Type Documentation**:\n   - Document new TypeScript interfaces and types\n   - Update existing type documentation for changes\n   - Add JSDoc comments for complex types\n   - Ensure type exports are properly documented\n\n4. **README Updates**:\n   - Update feature lists if new functionality was added\n   - Modify setup instructions if configuration changed\n   - Update usage examples if APIs changed\n   - Add new dependencies to installation instructions\n\n5. **Code Comments**:\n   - Add or update inline code comments for complex logic\n   - Document business rules and validation logic\n   - Explain non-obvious implementation decisions\n   - Add TODO comments for future improvements\n\nFor each documentation update:\n- Identify which files need documentation changes\n- Provide specific content updates needed\n- Ensure documentation follows consistent formatting\n- Include practical examples where helpful\n- Maintain professional and clear language\n\nFocus on keeping documentation accurate, helpful, and up-to-date with the current codebase."
+  }
+}

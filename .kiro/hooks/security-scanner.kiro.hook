@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "name": "Security Vulnerability Scanner",
+  "description": "Scans code changes for potential security vulnerabilities, including authentication bypasses, data exposure risks, injection vulnerabilities, and insecure configurations. Provides security recommendations and best practices.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/services/**/*",
+      "src/utils/security.ts",
+      "src/utils/rateLimiting.ts",
+      "supabase/**/*",
+      "*.env*",
+      "vite.config.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A security-sensitive file has been modified. Please perform a comprehensive security analysis:\n\n1. **Authentication & Authorization**:\n   - Check for proper authentication checks\n   - Verify role-based access control implementation\n   - Ensure session management is secure\n   - Look for authentication bypass vulnerabilities\n\n2. **Data Protection**:\n   - Verify sensitive data is properly encrypted\n   - Check for data exposure in logs or responses\n   - Ensure proper input validation and sanitization\n   - Look for SQL injection or XSS vulnerabilities\n\n3. **API Security**:\n   - Check for proper rate limiting implementation\n   - Verify CORS configuration is secure\n   - Ensure API endpoints have proper authorization\n   - Look for information disclosure vulnerabilities\n\n4. **Configuration Security**:\n   - Check for hardcoded secrets or credentials\n   - Verify environment variable usage is secure\n   - Ensure production configurations are secure\n   - Look for debug information in production code\n\n5. **File Upload Security**:\n   - Verify file type validation is implemented\n   - Check for file size limits and virus scanning\n   - Ensure uploaded files are stored securely\n   - Look for path traversal vulnerabilities\n\nFor each finding, provide:\n- Severity level (Critical/High/Medium/Low)\n- Detailed description of the vulnerability\n- Potential impact and attack scenarios\n- Specific remediation steps\n- Code examples of secure implementations\n\nPrioritize findings that could lead to data breaches or system compromise."
+  }
+}

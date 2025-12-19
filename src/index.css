@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for smooth mobile experience */
+@layer base {
+  html {
+    /* Prevent zoom on iOS Safari when focusing inputs */
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevent zoom on form inputs on iOS */
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* Custom background image positioning for carousel */
+  .bg-carousel-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform, opacity;
+  }
+  
+  /* Dynamic background image utility */
+  .bg-dynamic {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: var(--bg-image);
+  }
+  
+  /* Carousel layers */
+  .carousel-layer-current {
+    z-index: 2;
+  }
+  
+  .carousel-layer-inactive {
+    z-index: 1;
+  }
+  
+  /* Smooth transitions for mobile */
+  .mobile-smooth {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Touch-friendly buttons */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent text selection on interactive elements */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer utilities {
+  /* Safe area support for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Print Styles */
+@media print {
+  /* Hide elements that shouldn't be printed */
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Ensure the page breaks properly */
+  .print-page-break {
+    page-break-before: always;
+  }
+  
+  /* Make sure PDF iframes print properly */
+  iframe {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 400px !important;
+    display: block !important;
+  }
+  
+  /* Ensure text is readable when printed */
+  body {
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+    color: black !important;
+    background: white !important;
+  }
+  
+  /* Make sure containers expand properly for print */
+  .space-y-8 > * + * {
+    margin-top: 1rem !important;
+  }
+  
+  /* Ensure headers are visible */
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+  
+  /* Make sure tables and grids display properly */
+  .grid {
+    display: block !important;
+  }
+  
+  .grid > * {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Ensure borders are visible in print */
+  .border {
+    border: 1px solid #ccc !important;
+  }
+  
+  /* Make sure the student paper section is included in print */
+  .print-include {
+    display: block !important;
+  }
+  
+  /* Critical: Remove height restrictions and overflow for print */
+  .max-h-\[600px\] {
+    max-height: none !important;
+  }
+  
+  .overflow-y-auto {
+    overflow: visible !important;
+  }
+  
+  .overflow-hidden {
+    overflow: visible !important;
+  }
+  
+  /* Ensure question cards print properly */
+  .space-y-4 > * + * {
+    margin-top: 1rem !important;
+  }
+  
+  /* Make sure all question content is visible */
+  .whitespace-pre-wrap {
+    white-space: pre-wrap !important;
+  }
+  
+  /* Ensure motion divs display properly in print */
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+  }
+  
+  [style*="transform"] {
+    transform: none !important;
+  }
+  
+  /* Page breaks for better question separation */
+  .question-card-print {
+    page-break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Ensure backgrounds are visible in print */
+  .bg-gray-50 {
+    background-color: #f9fafb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .bg-indigo-100 {
+    background-color: #e0e7ff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .bg-white {
+    background-color: white !important;
+  }
+}

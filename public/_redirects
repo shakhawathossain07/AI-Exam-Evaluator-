@@ -1,0 +1,5 @@
+# Netlify redirects for React Router SPA
+/*    /index.html   200
+
+# API proxy for CORS issues (if needed)
+/api/*  https://agpsxkxpimtuqlwqqeby.supabase.co/:splat  200

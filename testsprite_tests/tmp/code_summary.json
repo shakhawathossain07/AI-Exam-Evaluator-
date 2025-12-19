@@ -1,0 +1,195 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "React 18",
+    "Vite",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Supabase",
+    "PostgreSQL",
+    "Google Gemini AI",
+    "PDF.js",
+    "Lucide React",
+    "Jest",
+    "Vitest",
+    "ESLint"
+  ],
+  "features": [
+    {
+      "name": "Authentication System",
+      "description": "Supabase-based authentication with role-based access control, admin registration, and session management",
+      "files": [
+        "src/components/AuthWrapper.tsx",
+        "src/components/AuthCallback.tsx",
+        "src/components/AdminLogin.tsx",
+        "src/components/AdminRegistration.tsx",
+        "src/lib/supabase.ts"
+      ]
+    },
+    {
+      "name": "AI Exam Evaluator",
+      "description": "Core functionality for uploading exam papers and mark schemes, AI-powered evaluation using Google Gemini, and results display",
+      "files": [
+        "src/components/ExamEvaluator.tsx",
+        "src/components/EvaluationForm.tsx",
+        "src/components/EvaluationReview.tsx",
+        "src/components/ResultsDisplay.tsx",
+        "src/services/evaluationService.ts",
+        "src/services/api.ts"
+      ]
+    },
+    {
+      "name": "File Upload and Processing",
+      "description": "Multi-file upload system with PDF and image support, file validation, and preview functionality",
+      "files": [
+        "src/components/FileUpload.tsx",
+        "src/utils/fileProcessing.ts",
+        "src/utils/pdfUtils.ts",
+        "src/components/EnhancedPDFViewer.tsx"
+      ]
+    },
+    {
+      "name": "PDF Processing and Viewing",
+      "description": "Advanced PDF parsing, page-by-page analysis, question extraction, and interactive PDF viewer",
+      "files": [
+        "src/components/PDFQuestionViewer.tsx",
+        "src/components/StudentPaperPreview.tsx",
+        "src/components/PageNumberDebugger.tsx",
+        "src/components/PDFNavigationTest.tsx"
+      ]
+    },
+    {
+      "name": "IGCSE Question Paper Generator",
+      "description": "Specialized tool for generating IGCSE exam papers with multiple paper types, mark schemes, and PDF export",
+      "files": [
+        "src/components/IGCSEGenerator.tsx",
+        "src/components/igcse/QuestionPaperGenerator.tsx",
+        "src/components/igcse/MarkSchemeGenerator.tsx",
+        "src/components/igcse/PDFGenerator.tsx",
+        "src/components/igcse/IGCSESettings.tsx",
+        "src/data/igcse/exam_blueprints.ts",
+        "src/data/igcse/paper1_mcq.ts",
+        "src/data/igcse/paper2_core.ts",
+        "src/data/igcse/paper3_extended.ts",
+        "src/data/igcse/paper4_coursework_alt.ts",
+        "src/data/igcse/paper5_practical.ts",
+        "src/data/igcse/paper6_alt_practical.ts"
+      ]
+    },
+    {
+      "name": "Results Management and History",
+      "description": "Evaluation history tracking, results storage, search and filtering, and export capabilities",
+      "files": [
+        "src/components/ResultsHistory.tsx",
+        "src/components/ScoreCard.tsx",
+        "src/components/QuestionCard.tsx"
+      ]
+    },
+    {
+      "name": "Analytics and Reporting",
+      "description": "Usage analytics, performance metrics, evaluation statistics, and administrative reporting",
+      "files": [
+        "src/components/Analytics.tsx",
+        "src/components/AdminDashboard.tsx"
+      ]
+    },
+    {
+      "name": "Draft Management System",
+      "description": "Auto-save functionality for evaluation drafts, recovery system, and local storage management",
+      "files": [
+        "src/hooks/useDraftManager.ts",
+        "src/components/evaluation/DraftRecoveryBanner.tsx"
+      ]
+    },
+    {
+      "name": "State Management Hooks",
+      "description": "Custom React hooks for managing evaluation state, form data, and application state",
+      "files": [
+        "src/hooks/useExamEvaluator.ts",
+        "src/hooks/useExamEvaluatorState.ts",
+        "src/hooks/useEvaluatorReducer.ts",
+        "src/hooks/useEvaluationState.ts",
+        "src/hooks/useEvaluationActions.ts",
+        "src/hooks/useTransition.ts"
+      ]
+    },
+    {
+      "name": "Access Control System",
+      "description": "Evaluation limits management, role-based permissions, and usage tracking",
+      "files": [
+        "src/hooks/useEvaluationAccess.ts",
+        "src/components/evaluation/EvaluationStatusBanner.tsx"
+      ]
+    },
+    {
+      "name": "Navigation and UI Components",
+      "description": "Tab-based navigation, dashboard, settings, and responsive UI components",
+      "files": [
+        "src/components/Navigation.tsx",
+        "src/components/Dashboard.tsx",
+        "src/components/Settings.tsx",
+        "src/components/Header.tsx",
+        "src/components/BackgroundAnimation.tsx"
+      ]
+    },
+    {
+      "name": "Error Handling and Loading States",
+      "description": "Comprehensive error boundaries, loading spinners, error messages, and user feedback",
+      "files": [
+        "src/components/ErrorBoundary.tsx",
+        "src/components/ErrorMessage.tsx",
+        "src/components/LoadingSpinner.tsx",
+        "src/components/LoadingComponents.tsx",
+        "src/utils/errorHandler.ts"
+      ]
+    },
+    {
+      "name": "Security and Configuration",
+      "description": "Production security features, environment configuration, rate limiting, and secure API handling",
+      "files": [
+        "src/config/security.ts",
+        "src/config/environment.ts",
+        "src/utils/security.ts",
+        "src/utils/secureApi.ts",
+        "src/utils/rateLimiting.ts",
+        "src/utils/production-security.ts",
+        "src/utils/ultimate-f12-protection.ts"
+      ]
+    },
+    {
+      "name": "Exam Type Configuration",
+      "description": "Support for multiple exam types (IELTS, O-Level, A-Level, IGCSE) with specific grading criteria",
+      "files": [
+        "src/constants/examTypes.ts",
+        "src/types/evaluator.ts"
+      ]
+    },
+    {
+      "name": "Performance Optimization",
+      "description": "Performance monitoring, service worker integration, and optimization utilities",
+      "files": [
+        "src/utils/performance.ts",
+        "src/utils/serviceWorker.ts"
+      ]
+    },
+    {
+      "name": "Debug and Development Tools",
+      "description": "Debug components for development, Supabase connection testing, and development utilities",
+      "files": [
+        "src/components/DebugSupabase.tsx",
+        "src/components/PageNumberTest.tsx"
+      ]
+    },
+    {
+      "name": "Testing Infrastructure",
+      "description": "Comprehensive test suite with unit tests, integration tests, and component testing",
+      "files": [
+        "src/components/__tests__/ExamEvaluator.test.tsx",
+        "src/hooks/__tests__/useExamEvaluator.test.ts",
+        "src/services/__tests__/evaluationService.test.ts",
+        "src/config/__tests__/environment.test.ts",
+        "src/config/__tests__/security.test.ts"
+      ]
+    }
+  ]
+}
