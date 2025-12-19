@@ -391,9 +391,9 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
         </div>
 
         {/* Main content */}
-        <div className="relative z-10 min-h-screen flex">
+        <div className="relative z-10 min-h-screen flex flex-col lg:flex-row">
           {/* Left Panel - Branding & Info */}
-          <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 flex-col justify-center px-12 xl:px-20">
+          <div className="hidden lg:flex lg:w-1/2 xl:w-3/5 flex-col justify-center px-8 lg:px-12 xl:px-20">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -405,9 +405,9 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, type: 'spring' }}
-                className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-cyan-500/30"
+                className="w-14 h-14 xl:w-16 xl:h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6 xl:mb-8 shadow-lg shadow-cyan-500/30"
               >
-                <Brain className="w-9 h-9 text-white" />
+                <Brain className="w-7 h-7 xl:w-9 xl:h-9 text-white" />
               </motion.div>
 
               {/* Main Headline - Devin style */}
@@ -416,7 +416,7 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <h1 className="text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
+                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
                   <span className="text-cyan-400">AI Exam</span> Evaluator,
                   <br />
                   <span className="text-slate-300">the intelligent</span>
@@ -430,7 +430,7 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-slate-400 text-lg xl:text-xl mb-10 max-w-lg"
+                className="text-slate-400 text-base lg:text-lg xl:text-xl mb-8 xl:mb-10 max-w-lg"
               >
                 Transform your exam grading with AI-powered evaluation. Upload, analyze, and get instant feedback.
               </motion.p>
@@ -473,34 +473,34 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
           </div>
 
           {/* Right Panel - Auth Form */}
-          <div className="w-full lg:w-1/2 xl:w-2/5 flex items-center justify-center p-6 lg:p-12">
+          <div className="w-full lg:w-1/2 xl:w-2/5 flex items-center justify-center p-4 sm:p-6 lg:p-12">
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="w-full max-w-md"
+              className="w-full max-w-sm sm:max-w-md"
             >
               {/* Mobile Logo */}
-              <div className="lg:hidden text-center mb-8">
+              <div className="lg:hidden text-center mb-6 sm:mb-8">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.6, type: 'spring' }}
-                  className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/30"
+                  className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-cyan-500/30"
                 >
-                  <Brain className="w-8 h-8 text-white" />
+                  <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                 </motion.div>
-                <h1 className="text-2xl font-bold text-white mb-2">AI Exam Evaluator</h1>
-                <p className="text-slate-400 text-sm">Intelligent grading assistant</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">AI Exam Evaluator</h1>
+                <p className="text-slate-400 text-xs sm:text-sm">Intelligent grading assistant</p>
               </div>
 
               {/* Auth Card */}
-              <div className="bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-800 p-8 shadow-2xl">
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-white mb-2">
+              <div className="bg-slate-900/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-800 p-5 sm:p-8 shadow-2xl">
+                <div className="text-center mb-6 sm:mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">
                     {authMode === 'signin' ? 'Welcome back' : 'Create account'}
                   </h2>
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-slate-400 text-xs sm:text-sm">
                     {authMode === 'signin' 
                       ? 'Sign in to continue to your dashboard' 
                       : 'Get started with your free account'}
@@ -508,10 +508,10 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                 </div>
 
                 {/* Auth Form */}
-                <form onSubmit={handleAuth} className="space-y-5">
-                  <div className="space-y-4">
+                <form onSubmit={handleAuth} className="space-y-4 sm:space-y-5">
+                  <div className="space-y-3 sm:space-y-4">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                      <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 sm:mb-2">
                         Email Address
                       </label>
                       <input
@@ -520,14 +520,14 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200 text-white placeholder-slate-500"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200 text-white placeholder-slate-500 text-sm sm:text-base"
                         placeholder="you@example.com"
                         autoComplete="email"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+                      <label htmlFor="password" className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 sm:mb-2">
                         Password
                       </label>
                       <input
@@ -537,7 +537,7 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         minLength={6}
-                        className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200 text-white placeholder-slate-500"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200 text-white placeholder-slate-500 text-sm sm:text-base"
                         placeholder="••••••••"
                         autoComplete={authMode === 'signin' ? 'current-password' : 'new-password'}
                       />

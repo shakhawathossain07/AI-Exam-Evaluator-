@@ -46,18 +46,18 @@ export function FileUpload({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 sm:mb-2">
           {label} {required && <span className="text-cyan-400">*</span>}
         </label>
-        <p className="text-sm text-slate-500 mb-3">{description}</p>
+        <p className="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3">{description}</p>
       </div>
 
       <div
         {...getRootProps()}
         className={`
-          relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-300 group
+          relative border-2 border-dashed rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8 text-center cursor-pointer transition-all duration-300 group
           ${isDragActive 
             ? 'border-cyan-500 bg-cyan-500/10' 
             : 'border-slate-700 hover:border-cyan-500/50 hover:bg-slate-800/50'
@@ -65,22 +65,23 @@ export function FileUpload({
         `}
       >
         <input {...getInputProps()} />
-        <div className={`w-14 h-14 mx-auto mb-4 rounded-xl flex items-center justify-center transition-all duration-300 ${
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 mx-auto mb-3 sm:mb-4 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-300 ${
           isDragActive 
             ? 'bg-cyan-500/20 border border-cyan-500/30' 
             : 'bg-slate-800 border border-slate-700 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/10'
         }`}>
-          <UploadCloud className={`w-7 h-7 transition-colors ${isDragActive ? 'text-cyan-400' : 'text-slate-500 group-hover:text-cyan-400'}`} />
+          <UploadCloud className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-colors ${isDragActive ? 'text-cyan-400' : 'text-slate-500 group-hover:text-cyan-400'}`} />
         </div>
         {isDragActive ? (
-          <p className="text-cyan-400 font-medium">Drop files here...</p>
+          <p className="text-cyan-400 font-medium text-sm sm:text-base">Drop files here...</p>
         ) : (
           <div>
-            <p className="text-slate-300 font-medium mb-1">
-              Click to upload or drag and drop
+            <p className="text-slate-300 font-medium mb-1 text-sm sm:text-base">
+              <span className="hidden sm:inline">Click to upload or drag and drop</span>
+              <span className="sm:hidden">Tap to upload files</span>
             </p>
-            <p className="text-sm text-slate-500">
-              Images (PNG, JPG, GIF) or PDF files up to 10MB
+            <p className="text-xs sm:text-sm text-slate-500">
+              Images or PDF files up to 10MB
             </p>
           </div>
         )}

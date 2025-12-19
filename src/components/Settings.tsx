@@ -132,19 +132,19 @@ export function Settings() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 relative">
+    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 relative px-2 sm:px-0">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center"
+        className="text-center px-2"
       >
-        <div className="inline-flex items-center px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-sm text-cyan-400 mb-4">
-          <SettingsIcon className="w-4 h-4 mr-2" />
+        <div className="inline-flex items-center px-2.5 sm:px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-xs sm:text-sm text-cyan-400 mb-3 sm:mb-4">
+          <SettingsIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
           Account Configuration
         </div>
-        <h1 className="text-3xl font-bold text-white mb-2">Settings</h1>
-        <p className="text-slate-400">Your account settings and preferences</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1.5 sm:mb-2">Settings</h1>
+        <p className="text-slate-400 text-sm sm:text-base">Your account settings and preferences</p>
       </motion.div>
 
       {/* Global Configuration Info */}
@@ -152,35 +152,35 @@ export function Settings() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-gradient-to-br from-blue-500/10 to-cyan-500/5 backdrop-blur-sm rounded-2xl border border-blue-500/20 p-6"
+        className="bg-gradient-to-br from-blue-500/10 to-cyan-500/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-blue-500/20 p-4 sm:p-6"
       >
-        <div className="flex items-start space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
-            <Info className="w-6 h-6 text-white" />
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+            <Info className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <div className="flex-1">
-            <h2 className="text-lg font-semibold text-white mb-2">Global API Configuration</h2>
-            <p className="text-slate-400 mb-4">
+            <h2 className="text-base sm:text-lg font-semibold text-white mb-2">Global API Configuration</h2>
+            <p className="text-slate-400 text-sm sm:text-base mb-4">
               The AI evaluation system is configured globally by administrators. This ensures consistent 
               performance and eliminates the need for individual API key setup.
             </p>
             
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 space-y-3 border border-slate-700/50">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-300">Current Model:</span>
-                <span className="text-sm text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-lg border border-cyan-500/20">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 space-y-2 sm:space-y-3 border border-slate-700/50">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                <span className="text-xs sm:text-sm font-medium text-slate-300">Current Model:</span>
+                <span className="text-xs sm:text-sm text-cyan-400 bg-cyan-500/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border border-cyan-500/20 w-fit">
                   {globalSettings.geminiModel || 'Not configured'}
                 </span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-300">API Status:</span>
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                <span className="text-xs sm:text-sm font-medium text-slate-300">API Status:</span>
                 {isApiConfigured ? (
-                  <span className="text-sm text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20 flex items-center space-x-1">
+                  <span className="text-xs sm:text-sm text-emerald-400 bg-emerald-500/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border border-emerald-500/20 flex items-center space-x-1 w-fit">
                     <CheckCircle className="w-3 h-3" />
                     <span>Configured</span>
                   </span>
                 ) : (
-                  <span className="text-sm text-red-400 bg-red-500/10 px-3 py-1 rounded-lg border border-red-500/20 flex items-center space-x-1">
+                  <span className="text-xs sm:text-sm text-red-400 bg-red-500/10 px-2 sm:px-3 py-0.5 sm:py-1 rounded-lg border border-red-500/20 flex items-center space-x-1 w-fit">
                     <AlertCircle className="w-3 h-3" />
                     <span>Not Configured</span>
                   </span>

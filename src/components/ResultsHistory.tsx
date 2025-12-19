@@ -479,19 +479,19 @@ export function ResultsHistory() {
   }
 
   return (
-    <div className="space-y-6 relative">
+    <div className="space-y-4 sm:space-y-6 relative px-2 sm:px-0">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center"
+        className="text-center px-2"
       >
-        <div className="inline-flex items-center px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-sm text-cyan-400 mb-4">
-          <History className="w-4 h-4 mr-2" />
+        <div className="inline-flex items-center px-2.5 sm:px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-xs sm:text-sm text-cyan-400 mb-3 sm:mb-4">
+          <History className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
           Evaluation History
         </div>
-        <h1 className="text-3xl font-bold text-white mb-2">Evaluation Results</h1>
-        <p className="text-slate-400">Browse and manage your exam evaluation history</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1.5 sm:mb-2">Evaluation Results</h1>
+        <p className="text-slate-400 text-sm sm:text-base">Browse and manage your exam evaluation history</p>
       </motion.div>
 
       {/* Filters */}
@@ -499,18 +499,18 @@ export function ResultsHistory() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-6"
+        className="bg-slate-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-800/50 p-4 sm:p-6"
       >
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4">
           {/* Search */}
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 w-4 h-4" />
             <input
               type="text"
-              placeholder="Search by ID, student name, student ID, subject, or grade..."
+              placeholder="Search evaluations..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white placeholder-slate-500 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white placeholder-slate-500 transition-all text-sm sm:text-base"
             />
           </div>
 
@@ -521,7 +521,7 @@ export function ResultsHistory() {
               aria-label="Filter by status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="pl-10 pr-8 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white appearance-none transition-all"
+              className="w-full sm:w-auto pl-10 pr-8 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white appearance-none transition-all text-sm sm:text-base"
             >
               <option value="all" className="bg-slate-900">All Status</option>
               <option value="completed" className="bg-slate-900">Completed</option>
@@ -534,19 +534,19 @@ export function ResultsHistory() {
       </motion.div>
 
       {/* Results */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <AnimatePresence>
           {filteredEvaluations.length === 0 ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12"
+              className="text-center py-8 sm:py-12"
             >
-              <div className="w-16 h-16 bg-slate-800/50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-700/50">
-                <FileText className="w-8 h-8 text-slate-500" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800/50 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-slate-700/50">
+                <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-slate-500" />
               </div>
-              <h3 className="text-lg font-medium text-white mb-2">No evaluations found</h3>
-              <p className="text-slate-400">
+              <h3 className="text-base sm:text-lg font-medium text-white mb-1.5 sm:mb-2">No evaluations found</h3>
+              <p className="text-slate-400 text-sm sm:text-base">
                 {evaluations.length === 0 
                   ? "You haven't created any evaluations yet." 
                   : "No evaluations match your current filters."

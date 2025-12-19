@@ -147,39 +147,39 @@ export function Dashboard({ onNavigate }: DashboardProps) {
   }
 
   return (
-    <div className="space-y-8 relative">
+    <div className="space-y-6 sm:space-y-8 relative px-2 sm:px-0">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center"
+        className="text-center px-2"
       >
-        <div className="inline-flex items-center px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-sm text-cyan-400 mb-4">
-          <Zap className="w-4 h-4 mr-2" />
+        <div className="inline-flex items-center px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-xs sm:text-sm text-cyan-400 mb-3 sm:mb-4">
+          <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
           AI-Powered Exam Evaluation
         </div>
-        <h1 className="text-4xl font-bold text-white mb-3">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3">
           Welcome to Your <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Dashboard</span>
         </h1>
-        <p className="text-slate-400 text-lg">Monitor your exam evaluation progress and insights</p>
+        <p className="text-slate-400 text-sm sm:text-base lg:text-lg">Monitor your exam evaluation progress and insights</p>
       </motion.div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-cyan-500/30 transition-all duration-300"
+          className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-cyan-500/30 transition-all duration-300"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="flex items-center justify-between relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between relative gap-3">
             <div>
-              <p className="text-sm font-medium text-slate-400">Total Evaluations</p>
-              <p className="text-3xl font-bold text-white mt-1">{stats.totalEvaluations}</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">Total Evaluations</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stats.totalEvaluations}</p>
             </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center border border-cyan-500/20">
-              <FileText className="w-6 h-6 text-cyan-400" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg sm:rounded-xl flex items-center justify-center border border-cyan-500/20">
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
             </div>
           </div>
         </motion.div>
@@ -188,16 +188,16 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-emerald-500/30 transition-all duration-300"
+          className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-emerald-500/30 transition-all duration-300"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="flex items-center justify-between relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between relative gap-3">
             <div>
-              <p className="text-sm font-medium text-slate-400">Average Grade</p>
-              <p className="text-3xl font-bold text-white mt-1">{stats.averageGrade}</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">Average Grade</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stats.averageGrade}</p>
             </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl flex items-center justify-center border border-emerald-500/20">
-              <Award className="w-6 h-6 text-emerald-400" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg sm:rounded-xl flex items-center justify-center border border-emerald-500/20">
+              <Award className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
             </div>
           </div>
         </motion.div>
@@ -206,16 +206,16 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-purple-500/30 transition-all duration-300"
+          className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-purple-500/30 transition-all duration-300"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="flex items-center justify-between relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between relative gap-3">
             <div>
-              <p className="text-sm font-medium text-slate-400">This Week</p>
-              <p className="text-3xl font-bold text-white mt-1">{stats.recentEvaluations}</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">This Week</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stats.recentEvaluations}</p>
             </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center border border-purple-500/20">
-              <Clock className="w-6 h-6 text-purple-400" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg sm:rounded-xl flex items-center justify-center border border-purple-500/20">
+              <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
             </div>
           </div>
         </motion.div>
@@ -224,16 +224,16 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-orange-500/30 transition-all duration-300"
+          className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-orange-500/30 transition-all duration-300"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="flex items-center justify-between relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between relative gap-3">
             <div>
-              <p className="text-sm font-medium text-slate-400">Success Rate</p>
-              <p className="text-3xl font-bold text-white mt-1">{stats.completionRate}%</p>
+              <p className="text-xs sm:text-sm font-medium text-slate-400">Success Rate</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white mt-1">{stats.completionRate}%</p>
             </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center border border-orange-500/20">
-              <TrendingUp className="w-6 h-6 text-orange-400" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-lg sm:rounded-xl flex items-center justify-center border border-orange-500/20">
+              <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
             </div>
           </div>
         </motion.div>
@@ -241,11 +241,11 @@ export function Dashboard({ onNavigate }: DashboardProps) {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
-          <Sparkles className="w-5 h-5 mr-2 text-cyan-400" />
+        <h2 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4 flex items-center px-1">
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-cyan-400" />
           Quick Actions
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
             return (
@@ -257,15 +257,15 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                 whileHover={{ scale: 1.02, y: -4 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={action.action}
-                className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-slate-700/50 transition-all duration-300 text-left overflow-hidden"
+                className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-slate-700/50 transition-all duration-300 text-left overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-0 group-hover:opacity-5 transition-opacity`} />
-                <div className={`w-12 h-12 bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className="w-6 h-6 text-white" />
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${action.gradient} rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h3 className="font-semibold text-white mb-1 group-hover:text-cyan-300 transition-colors">{action.title}</h3>
-                <p className="text-sm text-slate-500">{action.description}</p>
-                <ArrowRight className="w-4 h-4 text-slate-600 absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 group-hover:text-cyan-400 transition-all transform translate-x-2 group-hover:translate-x-0" />
+                <h3 className="font-semibold text-white text-sm sm:text-base mb-1 group-hover:text-cyan-300 transition-colors">{action.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">{action.description}</p>
+                <ArrowRight className="w-4 h-4 text-slate-600 absolute bottom-4 sm:bottom-6 right-4 sm:right-6 opacity-0 group-hover:opacity-100 group-hover:text-cyan-400 transition-all transform translate-x-2 group-hover:translate-x-0" />
               </motion.button>
             );
           })}

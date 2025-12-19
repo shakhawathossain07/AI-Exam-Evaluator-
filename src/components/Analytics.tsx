@@ -161,26 +161,26 @@ export function Analytics() {
   }
 
   return (
-    <div className="space-y-8 relative">
+    <div className="space-y-6 sm:space-y-8 relative px-2 sm:px-0">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col md:flex-row items-center justify-between gap-4"
       >
-        <div className="text-center md:text-left">
-          <div className="inline-flex items-center px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-sm text-cyan-400 mb-4">
-            <BarChart3 className="w-4 h-4 mr-2" />
+        <div className="text-center md:text-left px-2">
+          <div className="inline-flex items-center px-2.5 sm:px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-xs sm:text-sm text-cyan-400 mb-3 sm:mb-4">
+            <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Performance Insights
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Analytics Dashboard</h1>
-          <p className="text-slate-400">Insights into your exam evaluation performance</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1.5 sm:mb-2">Analytics Dashboard</h1>
+          <p className="text-slate-400 text-sm sm:text-base">Insights into your exam evaluation performance</p>
         </div>
         
         <select
           value={timeRange}
           onChange={(e) => setTimeRange(e.target.value as any)}
-          className="px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white transition-all"
+          className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 text-white transition-all text-sm sm:text-base w-full sm:w-auto"
         >
           <option value="7d" className="bg-slate-900">Last 7 days</option>
           <option value="30d" className="bg-slate-900">Last 30 days</option>
@@ -190,14 +190,14 @@ export function Analytics() {
       </motion.div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="group relative bg-slate-900/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-800/50 hover:border-cyan-500/30 transition-all duration-300"
+          className="group relative bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-800/50 hover:border-cyan-500/30 transition-all duration-300"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="flex items-center justify-between relative">
             <div>
               <p className="text-sm font-medium text-slate-400">Total Evaluations</p>

@@ -209,7 +209,7 @@ export function ExamEvaluator() {
   }, [evaluationState.originalStudentPaperData, formData.studentPaperFiles]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 relative">
+    <div className="max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-6 lg:py-8 relative">
       <Header />
       
       {/* Evaluation Access Status Banner */}
@@ -239,19 +239,19 @@ export function ExamEvaluator() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-8"
+            className="bg-slate-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-800/50 p-4 sm:p-6 lg:p-8"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Student Information Section */}
-                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/5 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                    <span className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center mr-3 text-sm">📋</span>
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/5 backdrop-blur-sm p-4 sm:p-6 rounded-lg sm:rounded-xl border border-cyan-500/20">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center">
+                    <span className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center mr-2 sm:mr-3 text-xs sm:text-sm">📋</span>
                     Student Information
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <label htmlFor="studentName" className="block text-sm font-medium text-slate-300 mb-2">
+                      <label htmlFor="studentName" className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 sm:mb-2">
                         Student Name
                       </label>
                       <input
@@ -260,12 +260,12 @@ export function ExamEvaluator() {
                         value={formData.studentName}
                         onChange={(e) => updateFormData({ studentName: e.target.value })}
                         placeholder="Enter student's full name"
-                        className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all text-white placeholder-slate-500"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all text-white placeholder-slate-500 text-sm sm:text-base"
                         disabled={evaluationState.isLoading}
                       />
                     </div>
                     <div>
-                      <label htmlFor="studentId" className="block text-sm font-medium text-slate-300 mb-2">
+                      <label htmlFor="studentId" className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 sm:mb-2">
                         Student ID
                       </label>
                       <input
@@ -274,7 +274,7 @@ export function ExamEvaluator() {
                         value={formData.studentId}
                         onChange={(e) => updateFormData({ studentId: e.target.value })}
                         placeholder="Enter student ID/number"
-                        className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all text-white placeholder-slate-500"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 border border-slate-700 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all text-white placeholder-slate-500 text-sm sm:text-base"
                         disabled={evaluationState.isLoading}
                       />
                     </div>
