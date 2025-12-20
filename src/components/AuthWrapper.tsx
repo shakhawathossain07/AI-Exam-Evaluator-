@@ -50,7 +50,7 @@ const workflowSteps = [
 // YouTube Video Component
 function YouTubeEmbed() {
   const [isPlaying, setIsPlaying] = useState(false)
-  const videoId = '7n9bQw8xM5s'
+  const videoId = 'UGqk3DlpJeI'
 
   return (
     <motion.div
