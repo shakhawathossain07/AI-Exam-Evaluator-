@@ -19,6 +19,7 @@ import {
   Key
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { DynamicBackground } from './BackgroundAnimation';
 
 // Type definitions
 interface AdminData {
@@ -491,9 +492,12 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+      {/* Stunning Dynamic Background */}
+      <DynamicBackground variant="admin" />
+      
       {/* Header */}
-      <div className="bg-slate-900/80 backdrop-blur-sm shadow-lg border-b border-slate-800/50">
+      <div className="relative z-10 bg-slate-900/80 backdrop-blur-sm shadow-lg border-b border-slate-800/50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
@@ -515,7 +519,7 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         {/* Navigation */}
         <div className="flex space-x-1 mb-8 bg-slate-900/50 backdrop-blur-sm rounded-2xl p-2 shadow-lg border border-slate-800/50">
           {navItems.map((item) => {

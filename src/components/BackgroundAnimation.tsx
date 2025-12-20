@@ -289,3 +289,129 @@ function FloatingIcons() {
     </div>
   );
 }
+
+// Stunning Dynamic Background Component for all pages
+export function DynamicBackground({ variant = 'default' }: { variant?: 'default' | 'admin' }) {
+  const primaryColor = variant === 'admin' ? 'red' : 'cyan';
+  const secondaryColor = variant === 'admin' ? 'orange' : 'blue';
+  
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Animated gradient mesh */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+      
+      {/* Large animated orbs */}
+      <motion.div
+        animate={{ 
+          x: [0, 100, 50, 0],
+          y: [0, 50, 100, 0],
+          scale: [1, 1.2, 1, 1.2, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute -top-40 -left-40 w-[500px] h-[500px] bg-gradient-to-br ${variant === 'admin' ? 'from-red-500/30 to-orange-600/20' : 'from-cyan-500/30 to-blue-600/20'} rounded-full blur-3xl`}
+      />
+      <motion.div
+        animate={{ 
+          x: [0, -80, -40, 0],
+          y: [0, 80, 40, 0],
+          scale: [1, 1.3, 1.1, 1],
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-gradient-to-tl from-purple-600/25 to-pink-500/15 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{ 
+          x: [0, 60, -60, 0],
+          y: [0, -40, 40, 0],
+          scale: [1, 1.15, 0.95, 1],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-gradient-to-br ${variant === 'admin' ? 'from-orange-500/20 to-red-400/15' : 'from-blue-500/20 to-cyan-400/15'} rounded-full blur-3xl`}
+      />
+      <motion.div
+        animate={{ 
+          x: [0, -50, 50, 0],
+          y: [0, 60, -30, 0],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-1/4 left-1/3 w-[350px] h-[350px] bg-gradient-to-tr from-indigo-500/20 to-violet-400/15 rounded-full blur-3xl"
+      />
+      
+      {/* Floating particles */}
+      {[...Array(25)].map((_, i) => (
+        <motion.div
+          key={`dynamic-particle-${i}`}
+          initial={{ 
+            x: `${Math.random() * 100}%`,
+            y: `${Math.random() * 100}%`,
+            opacity: Math.random() * 0.5 + 0.2,
+          }}
+          animate={{ 
+            y: [`${Math.random() * 100}%`, `${Math.random() * 100 - 50}%`],
+            x: [`${Math.random() * 100}%`, `${Math.random() * 100 + 20}%`],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{ 
+            duration: Math.random() * 15 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+          className={`absolute rounded-full ${
+            i % 3 === 0 
+              ? variant === 'admin' ? 'bg-red-400/50' : 'bg-cyan-400/50'
+              : i % 3 === 1 
+                ? variant === 'admin' ? 'bg-orange-400/50' : 'bg-blue-400/50'
+                : 'bg-purple-400/50'
+          }`}
+          style={{
+            width: Math.random() * 4 + 2,
+            height: Math.random() * 4 + 2,
+          }}
+        />
+      ))}
+      
+      {/* Animated geometric shapes */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        className={`absolute top-20 right-20 w-32 h-32 border ${variant === 'admin' ? 'border-red-500/20' : 'border-cyan-500/20'} rounded-xl`}
+      />
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-32 left-20 w-24 h-24 border border-purple-500/20 rounded-lg"
+      />
+      <motion.div
+        animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        className={`absolute top-1/2 left-10 w-16 h-16 border ${variant === 'admin' ? 'border-orange-500/15' : 'border-blue-500/15'} rounded-full`}
+      />
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        className="absolute top-40 left-1/3 w-20 h-20 border border-indigo-500/15"
+        style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
+      />
+      
+      {/* Grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(${variant === 'admin' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(6, 182, 212, 0.3)'} 1px, transparent 1px), linear-gradient(90deg, ${variant === 'admin' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(6, 182, 212, 0.3)'} 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+      
+      {/* Radial gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/80" />
+      
+      {/* Animated scan line effect */}
+      <motion.div
+        animate={{ y: ['-100%', '200%'] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        className={`absolute left-0 right-0 h-px bg-gradient-to-r from-transparent ${variant === 'admin' ? 'via-red-500/30' : 'via-cyan-500/30'} to-transparent`}
+      />
+    </div>
+  );
+}

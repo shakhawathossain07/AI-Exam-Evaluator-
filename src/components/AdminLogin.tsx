@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, LogIn, AlertCircle, Info, ArrowLeft, Lock, Users, Settings, Activity } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { DynamicBackground } from './BackgroundAnimation';
 
 // Admin feature cards
 const adminFeatures = [
@@ -146,24 +147,8 @@ export function AdminLogin({ onAdminLogin, onBackToUser }: AdminLoginProps) {
 
   return (
     <div className="min-h-screen bg-slate-950 relative overflow-hidden">
-      {/* Gradient background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-red-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="adminGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255, 255, 255, 0.5)" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#adminGrid)" />
-        </svg>
-      </div>
+      {/* Stunning Dynamic Background */}
+      <DynamicBackground variant="admin" />
 
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex">
