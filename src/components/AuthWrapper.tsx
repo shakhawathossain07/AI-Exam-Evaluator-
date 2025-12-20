@@ -383,11 +383,118 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
       <div className="min-h-screen bg-slate-950 relative overflow-hidden">
         <SupabaseSetupWarning />
         
-        {/* Gradient background effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl" />
+        {/* Dynamic Animated Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated gradient mesh */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+          
+          {/* Large animated orbs */}
+          <motion.div
+            animate={{ 
+              x: [0, 100, 50, 0],
+              y: [0, 50, 100, 0],
+              scale: [1, 1.2, 1, 1.2, 1],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-gradient-to-br from-cyan-500/30 to-blue-600/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              x: [0, -80, -40, 0],
+              y: [0, 80, 40, 0],
+              scale: [1, 1.3, 1.1, 1],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-gradient-to-tl from-purple-600/25 to-pink-500/15 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              x: [0, 60, -60, 0],
+              y: [0, -40, 40, 0],
+              scale: [1, 1.15, 0.95, 1],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-blue-500/20 to-cyan-400/15 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ 
+              x: [0, -50, 50, 0],
+              y: [0, 60, -30, 0],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 left-1/3 w-[350px] h-[350px] bg-gradient-to-tr from-indigo-500/20 to-violet-400/15 rounded-full blur-3xl"
+          />
+          
+          {/* Floating particles */}
+          {[...Array(30)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              initial={{ 
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
+                opacity: Math.random() * 0.5 + 0.2,
+              }}
+              animate={{ 
+                y: [null, Math.random() * -200 - 100],
+                opacity: [null, 0],
+              }}
+              transition={{ 
+                duration: Math.random() * 10 + 10,
+                repeat: Infinity,
+                ease: "linear",
+                delay: Math.random() * 10,
+              }}
+              className={`absolute w-${Math.random() > 0.5 ? '1' : '2'} h-${Math.random() > 0.5 ? '1' : '2'} rounded-full ${
+                i % 3 === 0 ? 'bg-cyan-400/60' : i % 3 === 1 ? 'bg-blue-400/60' : 'bg-purple-400/60'
+              }`}
+              style={{
+                width: Math.random() * 4 + 2,
+                height: Math.random() * 4 + 2,
+              }}
+            />
+          ))}
+          
+          {/* Animated geometric shapes */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            className="absolute top-20 right-20 w-32 h-32 border border-cyan-500/20 rounded-xl"
+          />
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-32 left-20 w-24 h-24 border border-purple-500/20 rounded-lg"
+          />
+          <motion.div
+            animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/2 left-10 w-16 h-16 border border-blue-500/15 rounded-full"
+          />
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            className="absolute top-40 left-1/3 w-20 h-20 border border-indigo-500/15"
+            style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }}
+          />
+          
+          {/* Grid overlay */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)`,
+              backgroundSize: '60px 60px',
+            }}
+          />
+          
+          {/* Radial gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-950/80" />
+          
+          {/* Animated scan line effect */}
+          <motion.div
+            animate={{ y: ['-100%', '200%'] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+          />
         </div>
 
         {/* Main content */}
