@@ -410,8 +410,8 @@ export function EvaluationReview({ results, studentPaperFiles = [], onSave, onCa
       {/* Chief Examiner's Feedback */}
       <div className="bg-slate-900/50 rounded-2xl border border-slate-800/50 p-6">
         <h3 className="text-lg font-semibold text-white mb-4">Chief Examiner's Feedback</h3>
-        <textarea
-          value={editedFeedback}
+        <textarea            id="chief-examiner-feedback"
+            name="feedback"          value={editedFeedback}
           onChange={(e) => updateFeedback(e.target.value)}
           className="w-full h-32 p-4 border border-slate-700 rounded-xl focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 bg-slate-800/50 text-white placeholder:text-slate-500 resize-none"
           placeholder="Enter overall feedback for the student..."

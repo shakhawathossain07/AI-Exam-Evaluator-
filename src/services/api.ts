@@ -376,14 +376,22 @@ async function evaluateWithGeminiDirect(
               metadata: { validationPassed: false, issues: validation.issues, isBlankPaper: false }
             };
           }
+          throw new Error(`Validation failed with ${validation.issues.length} issues: ${validation.issues.join(', ')}`);
         }
-      } catch {
-        return {
-          success: true,
-          evaluation: extractJSONFromResponse(generatedText) || createFallbackEvaluation(totalPossibleMarks, 'JSON parse failed', studentInfo),
-          rawResponse: generatedText,
-          metadata: {}
-        };
+      } catch (parseError) {
+        console.warn(`JSON Parse or Validation failed on attempt ${attempt}:`, parseError);
+        const extracted = extractJSONFromResponse(generatedText);
+        if (extracted) {
+          console.log('Successfully extracted JSON despite malformed response');
+          return {
+            success: true,
+            evaluation: extracted,
+            rawResponse: generatedText,
+            metadata: {}
+          };
+        }
+        // If extraction also fails, throw to trigger outer retry block
+        throw new Error('AI returned malformed or incomplete JSON response');
       }
     } catch (error) {
       attempt++;
@@ -583,10 +591,12 @@ function validateAndFixEvaluationData(data: EvaluationData, totalPossibleMarks: 
 // Fallback evaluation structure
 function createFallbackEvaluation(totalPossibleMarks: number, reason: string, studentInfo?: StudentInfo): EvaluationData {
   const fallbackMarks = 0;
+  const safeTotal = totalPossibleMarks > 0 ? totalPossibleMarks : 100;
+  
   return {
     summary: {
       totalAwarded: fallbackMarks,
-      totalPossible: totalPossibleMarks,
+      totalPossible: safeTotal,
       percentage: 0,
       grade: getDynamicGrade(0, studentInfo?.examType || 'Standard'),
       feedback: `A fallback evaluation was generated. Reason: ${reason}. Please review the results carefully.`
@@ -598,7 +608,7 @@ function createFallbackEvaluation(totalPossibleMarks: number, reason: string, st
       transcription: 'Processed',
       evaluation: 'Fallback completed',
       justification: 'An issue occurred during AI evaluation, and a fallback response was created.',
-      marks: `${fallbackMarks}/${totalPossibleMarks}`
+      marks: `${fallbackMarks}/${safeTotal}`
     }],
     rawResponse: `Fallback evaluation created: ${reason}`
   };
@@ -794,27 +804,49 @@ export async function isCurrentUserAdmin(): Promise<boolean> {
 
 function extractJSONFromResponse(text: string): EvaluationData | null {
   if (!text) return null;
-  // Try parsing the text directly first
-  try { 
-    return JSON.parse(text); 
-  } catch {}
-
-  // Try removing markdown backticks and parsing
-  const cleanedText = text.replace(/```json\s*|\s*```/g, '').trim();
-  try { 
-    return JSON.parse(cleanedText); 
-  } catch {}
   
-  // Try extracting just the JSON object part
+  // Clean markdown backticks
+  let cleanedText = text.replace(/```json\s*|\s*```/g, '').trim();
+  
+  // Try parsing the text directly first
+  try { return JSON.parse(cleanedText); } catch {}
+  
   const firstBrace = cleanedText.indexOf('{');
-  const lastBrace = cleanedText.lastIndexOf('}');
-  if (firstBrace !== -1 && lastBrace > firstBrace) {
-    try { 
-      return JSON.parse(cleanedText.substring(firstBrace, lastBrace + 1)); 
-    } catch {}
+  if (firstBrace === -1) {
+    console.error("Failed to extract JSON: No opening brace found.");
+    return null;
+  }
+  
+  // Start from the first brace
+  cleanedText = cleanedText.substring(firstBrace);
+  
+  // Truncated/Malformed JSON Recovery: Try progressively truncating from the end
+  // Find the last closing brace and attempt to close the structure
+  let lastValidBrace = cleanedText.lastIndexOf('}');
+  let attempts = 0;
+  
+  while (lastValidBrace > 0 && attempts < 50) {
+    const sliced = cleanedText.substring(0, lastValidBrace + 1);
+    
+    // Direct parse
+    try { return JSON.parse(sliced); } catch {}
+    
+    // Check if it needs array and object closures
+    try { return JSON.parse(sliced + ']}'); } catch {}
+    try { return JSON.parse(sliced + ']}'); } catch {} // Repeated for safety
+    try { return JSON.parse(sliced + '}]}'); } catch {}
+    try { return JSON.parse(sliced + '}}'); } catch {}
+    
+    // If it ends with a comma inside the JSON (e.g. trailing comma after a question), remove it before capping
+    const cleanedSliced = sliced.replace(/,\s*$/, '');
+    try { return JSON.parse(cleanedSliced + ']}'); } catch {}
+    
+    // Find the brace before this one
+    lastValidBrace = cleanedText.lastIndexOf('}', lastValidBrace - 1);
+    attempts++;
   }
 
-  console.error("Failed to extract JSON from malformed response:", text);
+  console.error("Failed to extract JSON from malformed response. Truncated preview:", text.substring(0, 200) + '...');
   return null;
 }
 
