@@ -62,7 +62,7 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
   const [activeTab, setActiveTab] = useState<AdminTab>('settings');
   const [globalSettings, setGlobalSettings] = useState({
     geminiApiKey: '',
-    geminiModel: 'gemini-2.5-flash'
+    geminiModel: 'gemini-3-flash-preview'
   });
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [admins, setAdmins] = useState<AdminUser[]>([]);
@@ -120,13 +120,13 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
         console.log('✅ Global settings loaded successfully:', data);
         setGlobalSettings({
           geminiApiKey: data.api_key || '',
-          geminiModel: data.model || 'gemini-2.5-flash'
+          geminiModel: data.model || 'gemini-3-flash-preview'
         });
       } else {
         console.log('⚠️ No settings data returned, using defaults');
         setGlobalSettings({
           geminiApiKey: '',
-          geminiModel: 'gemini-2.5-flash'
+          geminiModel: 'gemini-3-flash-preview'
         });
       }
     } catch (error) {
@@ -134,7 +134,7 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
       // Set default values on error
       setGlobalSettings({
         geminiApiKey: '',
-        geminiModel: 'gemini-2.5-flash'
+        geminiModel: 'gemini-3-flash-preview'
       });
     }
   };
@@ -476,7 +476,8 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
   };
 
   const availableModels = [
-    { value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (Recommended - Latest)' },
+    { value: 'gemini-3-flash-preview', label: 'Gemini 3 Flash Preview (Recommended)' },
+    { value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },
     { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash (Stable)' },
     { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash (Legacy)' },
     { value: 'gemini-2.5-flash-preview-05-20', label: 'Gemini 2.5 Flash Preview' }

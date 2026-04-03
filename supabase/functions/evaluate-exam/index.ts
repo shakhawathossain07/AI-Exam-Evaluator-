@@ -88,7 +88,7 @@ Deno.serve(async (req) => {
       totalPossibleMarks, 
       studentInfo,
       geminiApiKey, 
-      geminiModel || 'gemini-2.5-flash'
+      geminiModel || 'gemini-3-flash-preview'
     )
 
     // Don't update the evaluation status to completed here - let the frontend do it after review
@@ -153,7 +153,7 @@ async function evaluateExamPaper(studentPaperData: any[], markSchemeData: any[],
     throw new Error('Gemini API key not provided. Please set your API key in the settings.')
   }
 
-  const API_MODEL = model || 'gemini-2.5-flash'
+  const API_MODEL = model || 'gemini-3-flash-preview'
 
   const payload = buildAIPayload(studentPaperData, markSchemeData, totalMarks, studentInfo)
   

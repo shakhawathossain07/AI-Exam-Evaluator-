@@ -99,7 +99,7 @@ Deno.serve(async (req) => {
       .from('global_settings')
       .insert({
         gemini_api_key: null,
-        gemini_model: 'gemini-2.5-flash',
+        gemini_model: 'gemini-3-flash-preview',
         updated_by: newAdmin.id
       })
 

@@ -362,7 +362,7 @@ async function handleGetGlobalSettings(supabaseAdmin: any) {
     return new Response(
       JSON.stringify(data || {
         geminiApiKey: '',
-        geminiModel: 'gemini-2.5-flash'
+        geminiModel: 'gemini-3-flash-preview'
       }),
       { 
         status: 200, 
@@ -388,7 +388,7 @@ async function handleUpdateGlobalSettings(req: Request, supabaseAdmin: any) {
     // Use the safe RPC function that prevents multiple rows
     const { data, error } = await supabaseAdmin.rpc('update_global_settings', {
       new_api_key: geminiApiKey,
-      new_model: geminiModel || 'gemini-2.5-flash'
+      new_model: geminiModel || 'gemini-3-flash-preview'
     })
 
     if (error) {

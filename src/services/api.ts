@@ -255,7 +255,7 @@ async function evaluateWithGeminiDirect(
     if (file.data && typeof file.type === 'string') {
       if (file.type === 'application/pdf' || file.type.startsWith('image/')) {
         contentParts.push({
-          inline_data: { mime_type: file.type, data: file.data }
+          inlineData: { mimeType: file.type, data: file.data }
         });
         console.log(`Added mark scheme file: ${file.name}`);
       }
@@ -617,7 +617,7 @@ export async function evaluateExamPaper(formData: FormData) {
 
   const globalSettings = await fetchGlobalSettings();
   const geminiApiKey = globalSettings?.geminiApiKey || '';
-  const geminiModel = globalSettings?.geminiModel || 'gemini-2.5-flash';
+  const geminiModel = globalSettings?.geminiModel || 'gemini-3-flash-preview';
   if (!geminiApiKey) throw new Error('Gemini API key not configured');
 
   const studentPaperFiles = formData.getAll('studentPaper') as File[];
@@ -702,7 +702,7 @@ async function fetchGlobalSettings() {
       const { data } = await supabase.rpc('get_global_settings');
       if (data) {
         console.log('Successfully fetched settings from RPC');
-        return { geminiApiKey: data.api_key, geminiModel: data.model || 'gemini-2.5-flash' };
+        return { geminiApiKey: data.api_key, geminiModel: data.model || 'gemini-3-flash-preview' };
       }
     } catch (rpcError) {
       console.warn('RPC not available, falling back to direct table query:', rpcError.message);
@@ -714,7 +714,7 @@ async function fetchGlobalSettings() {
     const { data } = await supabase.from('global_settings').select('*').limit(1).then(d => ({ data: d.data?.[0] }));
     if (data) {
       console.log('Successfully fetched settings from direct table query');
-      return { geminiApiKey: data.gemini_api_key, geminiModel: data.gemini_model || 'gemini-2.5-flash' };
+      return { geminiApiKey: data.gemini_api_key, geminiModel: data.gemini_model || 'gemini-3-flash-preview' };
     }
   } catch (tableError) {
     console.warn('Direct table query failed:', tableError.message);
@@ -793,22 +793,27 @@ export async function isCurrentUserAdmin(): Promise<boolean> {
 }
 
 function extractJSONFromResponse(text: string): EvaluationData | null {
+  if (!text) return null;
+  // Try parsing the text directly first
+  try { 
+    return JSON.parse(text); 
+  } catch {}
+
+  // Try removing markdown backticks and parsing
   const cleanedText = text.replace(/```json\s*|\s*```/g, '').trim();
-  try { return JSON.parse(cleanedText); } catch {
-    return null;
+  try { 
+    return JSON.parse(cleanedText); 
+  } catch {}
+  
+  // Try extracting just the JSON object part
+  const firstBrace = cleanedText.indexOf('{');
+  const lastBrace = cleanedText.lastIndexOf('}');
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    try { 
+      return JSON.parse(cleanedText.substring(firstBrace, lastBrace + 1)); 
+    } catch {}
   }
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (jsonMatch) try { 
-    return JSON.parse(jsonMatch[0]); 
-  } catch {
-    return null;
-  }
-  const firstBrace = text.indexOf('{'), lastBrace = text.lastIndexOf('}');
-  if (firstBrace !== -1 && lastBrace > firstBrace) try { 
-    return JSON.parse(text.substring(firstBrace, lastBrace + 1)); 
-  } catch {
-    return null;
-  }
+
   console.error("Failed to extract JSON from malformed response:", text);
   return null;
 }

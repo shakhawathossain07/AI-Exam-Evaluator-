@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 export function Settings() {
   const [globalSettings, setGlobalSettings] = useState({
     geminiApiKey: '',
-    geminiModel: 'gemini-2.5-flash'
+    geminiModel: 'gemini-3-flash-preview'
   });
   const [isApiConfigured, setIsApiConfigured] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ export function Settings() {
         console.log('✅ Global settings loaded successfully:', data);
         setGlobalSettings({
           geminiApiKey: data.api_key || '',
-          geminiModel: data.model || 'gemini-2.5-flash'
+          geminiModel: data.model || 'gemini-3-flash-preview'
         });
         
         // Check if API key is actually configured (not empty and has reasonable length)
@@ -73,7 +73,7 @@ export function Settings() {
       // Set default values on error
       setGlobalSettings({
         geminiApiKey: '',
-        geminiModel: 'gemini-2.5-flash'
+        geminiModel: 'gemini-3-flash-preview'
       });
     } finally {
       setLoading(false);

@@ -340,7 +340,7 @@ class SecureAdmin {
 
     // Validate model if provided
     if (settings.geminiModel !== undefined) {
-      const allowedModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-2.5-flash-preview-05-20'];
+      const allowedModels = ['gemini-3-flash-preview', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-2.5-flash-preview-05-20'];
       const sanitizedModel = sanitizeTextInput(settings.geminiModel, 50);
       
       if (!allowedModels.includes(sanitizedModel)) {
