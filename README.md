@@ -10,6 +10,7 @@ An intelligent, AI-powered system designed to automate the evaluation of exam pa
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-18181A?style=for-the-badge&logo=supabase&logoColor=3ECF8E)](https://supabase.io/)
 [![Google Gemini API](https://img.shields.io/badge/Gemini_API-8E75B2?style=for-the-badge&logo=googlebard&logoColor=white)](https://gemini.google.com/)
+<img width="959" height="413" alt="image" src="https://github.com/user-attachments/assets/d540ae6f-7c6c-4e16-b5ad-115db75659aa" />
 
 ---
 
