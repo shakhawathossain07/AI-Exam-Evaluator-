@@ -1,5 +1,7 @@
 <div align="center">
 
+   <img width="203" height="52" alt="image" src="https://github.com/user-attachments/assets/9ce8457f-9dee-41de-9e7f-bbd634941062" />
+
 # 🎯 AI Exam Evaluator
 
 An intelligent, AI-powered system designed to automate the evaluation of exam papers, manage grading workflows, and generate high-quality question papers. Built with modern web technologies and powered by advanced AI models.
