@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, UserPlus, AlertCircle, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { sanitizeTextInput, detectSqlInjection, validateEmail } from '../utils/security';
 
 interface AdminRegistrationProps {
   onAdminLogin: (adminData: any) => void;
@@ -51,6 +52,20 @@ export function AdminRegistration({ onAdminLogin, onBackToLogin }: AdminRegistra
       return;
     }
 
+    // Validate email format and check for injection
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      setError(emailValidation.error || 'Invalid email format');
+      setLoading(false);
+      return;
+    }
+
+    if (detectSqlInjection(email)) {
+      setError('Invalid email format');
+      setLoading(false);
+      return;
+    }
+
     // Email domain validation - only allow Gmail, Outlook, Yahoo, and .edu emails
     const allowedDomains = [
       'gmail.com',
@@ -65,13 +80,15 @@ export function AdminRegistration({ onAdminLogin, onBackToLogin }: AdminRegistra
       return;
     }
 
+    const sanitizedEmail = sanitizeTextInput(email.trim(), 254);
+
     try {
       // Try Edge Function first
       try {
         const { data, error } = await supabase.functions.invoke('admin-api', {
           body: { 
             action: 'register',
-            email, 
+            email: sanitizedEmail, 
             password 
           },
           method: 'POST'
@@ -96,7 +113,7 @@ export function AdminRegistration({ onAdminLogin, onBackToLogin }: AdminRegistra
         const { data: existingAdmin, error: checkError } = await supabase
           .from('admin_users')
           .select('id')
-          .eq('email', email)
+          .eq('email', sanitizedEmail)
           .single();
 
         console.log('Existing admin check:', { existingAdmin, checkError });
@@ -106,14 +123,14 @@ export function AdminRegistration({ onAdminLogin, onBackToLogin }: AdminRegistra
         }
 
         // Try to insert new admin directly using service role
-        console.log('Attempting to insert admin with email:', email);
+        console.log('Attempting to insert admin with email:', sanitizedEmail);
         console.log('Password hash length:', hashedPassword.length);
 
         // Try using a manual SQL approach with RPC
         let newAdmin = null;
         try {
           const { data: rpcResult, error: insertError } = await supabase.rpc('create_admin_user', {
-            admin_email: email,
+            admin_email: sanitizedEmail,
             admin_password_hash: hashedPassword
           });
 
@@ -131,7 +148,7 @@ export function AdminRegistration({ onAdminLogin, onBackToLogin }: AdminRegistra
           const { data: directInsertResult, error: insertError } = await supabase
             .from('admin_users')
             .insert({
-              email,
+              email: sanitizedEmail,
               password_hash: hashedPassword,
               is_default_admin: false
             })
