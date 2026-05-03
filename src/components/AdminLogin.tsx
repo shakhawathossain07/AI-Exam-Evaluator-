@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, LogIn, AlertCircle, Info, ArrowLeft, Lock, Users, Settings, Activity } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { sanitizeTextInput, detectSqlInjection, validateEmail } from '../utils/security';
 import { DynamicBackground } from './BackgroundAnimation';
 
 // Admin feature cards
@@ -61,13 +62,29 @@ export function AdminLogin({ onAdminLogin, onBackToUser }: AdminLoginProps) {
     setLoading(true);
     setError(null);
 
+    // Validate and sanitize inputs before any database operation
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      setError(emailValidation.error || 'Invalid email format');
+      setLoading(false);
+      return;
+    }
+
+    if (detectSqlInjection(email)) {
+      setError('Invalid email format');
+      setLoading(false);
+      return;
+    }
+
+    const sanitizedEmail = sanitizeTextInput(email.trim(), 254);
+
     try {
       // Try Edge Function first
       try {
         const { data, error } = await supabase.functions.invoke('admin-api', {
           body: { 
             action: 'login',
-            email, 
+            email: sanitizedEmail, 
             password 
           },
           method: 'POST'
@@ -85,7 +102,7 @@ export function AdminLogin({ onAdminLogin, onBackToUser }: AdminLoginProps) {
         const { data: adminUser, error: queryError } = await supabase
           .from('admin_users')
           .select('*')
-          .eq('email', email)
+          .eq('email', sanitizedEmail)
           .single();
 
         if (queryError) {
