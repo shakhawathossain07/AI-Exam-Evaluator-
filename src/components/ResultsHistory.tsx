@@ -121,6 +121,17 @@ export function ResultsHistory() {
     };
   };
 
+  // Escape HTML entities to prevent XSS in the print window
+  const escapeHtml = (str: string | undefined | null): string => {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  };
+
   const deleteEvaluation = async (evaluationId: string) => {
     if (!confirm('Are you sure you want to delete this evaluation?')) return;
 
@@ -331,25 +342,25 @@ export function ResultsHistory() {
       <div class="student-info">
         <h3>Student Information</h3>
         <div class="info-grid">
-          ${studentInfo.studentName ? `
+      ${studentInfo.studentName ? `
           <div class="info-item">
             <span class="info-label">Name:</span>
-            <span>${studentInfo.studentName}</span>
+            <span>${escapeHtml(studentInfo.studentName)}</span>
           </div>` : ''}
           ${studentInfo.studentId ? `
           <div class="info-item">
             <span class="info-label">ID:</span>
-            <span>${studentInfo.studentId}</span>
+            <span>${escapeHtml(studentInfo.studentId)}</span>
           </div>` : ''}
           ${studentInfo.subject ? `
           <div class="info-item">
             <span class="info-label">Subject:</span>
-            <span>${studentInfo.subject}</span>
+            <span>${escapeHtml(studentInfo.subject)}</span>
           </div>` : ''}
           ${studentInfo.examType ? `
           <div class="info-item">
             <span class="info-label">Exam Type:</span>
-            <span>${studentInfo.examType}</span>
+            <span>${escapeHtml(studentInfo.examType)}</span>
           </div>` : ''}
         </div>
       </div>` : ''}
@@ -372,7 +383,7 @@ export function ResultsHistory() {
       ${summary?.feedback ? `
       <div class="feedback-section">
         <h3>Chief Examiner's Summary</h3>
-        <p>${summary.feedback.replace(/\n/g, '<br>')}</p>
+        <p>${escapeHtml(summary.feedback).replace(/\n/g, '<br>')}</p>
       </div>` : ''}
 
       ${questions.length > 0 ? `
@@ -381,29 +392,29 @@ export function ResultsHistory() {
         ${questions.map((question, index) => `
         <div class="question-card">
           <div class="question-header">
-            <span class="question-title">${question.heading || `Question ${index + 1}`}</span>
-            <span class="question-marks">${question.marks || 'N/A'}</span>
+            <span class="question-title">${escapeHtml(question.heading) || `Question ${index + 1}`}</span>
+            <span class="question-marks">${escapeHtml(question.marks) || 'N/A'}</span>
           </div>
           <div class="question-content">
             ${question.questionText ? `
             <div class="question-section">
               <h5>Question</h5>
-              <div class="question-text">${question.questionText}</div>
+              <div class="question-text">${escapeHtml(question.questionText)}</div>
             </div>` : ''}
             ${question.transcription ? `
             <div class="question-section">
               <h5>Student's Answer</h5>
-              <div class="question-text">${question.transcription}</div>
+              <div class="question-text">${escapeHtml(question.transcription)}</div>
             </div>` : ''}
             ${question.evaluation ? `
             <div class="question-section">
               <h5>Evaluation</h5>
-              <p>${question.evaluation}</p>
+              <p>${escapeHtml(question.evaluation)}</p>
             </div>` : ''}
             ${question.justification ? `
             <div class="question-section">
               <h5>Justification</h5>
-              <p>${question.justification}</p>
+              <p>${escapeHtml(question.justification)}</p>
             </div>` : ''}
           </div>
         </div>`).join('')}
