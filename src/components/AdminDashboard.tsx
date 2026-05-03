@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { DynamicBackground } from './BackgroundAnimation';
+import { sanitizeTextInput, detectSqlInjection, validateEmail, SECURITY_PATTERNS } from '../utils/security';
 
 // Type definitions
 interface AdminData {
@@ -304,6 +305,12 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
         console.log('Edge function not available, using direct database approach');
       }
 
+      // Validate userId format (UUID)
+      if (!SECURITY_PATTERNS.UUID.test(userId)) {
+        setUserMessage({ type: 'error', text: 'Invalid user ID format.' });
+        return;
+      }
+
       // Fallback: Direct database update using RPC function
       const { data, error } = await supabase.rpc('update_user_evaluation_limit', {
         target_user_id: userId,
@@ -328,6 +335,12 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
 
   const resetUserEvaluations = async (userId: string) => {
     try {
+      // Validate userId format (UUID)
+      if (!SECURITY_PATTERNS.UUID.test(userId)) {
+        setUserMessage({ type: 'error', text: 'Invalid user ID format.' });
+        return;
+      }
+
       // Reset user's evaluation count to 0
       const { data, error } = await supabase.rpc('reset_user_evaluation_count', {
         target_user_id: userId
@@ -351,6 +364,12 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
 
   const setUserEvaluationCount = async (userId: string, newCount: number) => {
     try {
+      // Validate userId format (UUID)
+      if (!SECURITY_PATTERNS.UUID.test(userId)) {
+        setUserMessage({ type: 'error', text: 'Invalid user ID format.' });
+        return;
+      }
+
       // Set user's evaluation count to specific value
       const { data, error } = await supabase.rpc('set_user_evaluation_count', {
         target_user_id: userId,
@@ -385,13 +404,29 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
     try {
       console.log('🔧 Attempting to assign new admin:', newAdminEmail);
       
+      // Validate and sanitize email
+      const emailValidation = validateEmail(newAdminEmail);
+      if (!emailValidation.isValid) {
+        setMessage({ type: 'error', text: emailValidation.error || 'Invalid email format.' });
+        setLoading(false);
+        return;
+      }
+
+      if (detectSqlInjection(newAdminEmail)) {
+        setMessage({ type: 'error', text: 'Invalid email format.' });
+        setLoading(false);
+        return;
+      }
+
+      const sanitizedNewAdminEmail = sanitizeTextInput(newAdminEmail.trim(), 254);
+
       // Hash the password
       const hashedPassword = await hashPasswordSimple(newAdminPassword);
       
       // Use the new RPC function
       const { data, error } = await supabase.rpc('assign_new_admin', {
-        requester_email: adminData.email,
-        new_admin_email: newAdminEmail,
+        requester_email: sanitizeTextInput(adminData.email, 254),
+        new_admin_email: sanitizedNewAdminEmail,
         new_admin_password_hash: hashedPassword
       });
 
@@ -435,10 +470,18 @@ export function AdminDashboard({ adminData, onLogout }: AdminDashboardProps) {
     try {
       console.log('🗑️ Attempting to remove admin:', adminEmail);
       
+      // Validate and sanitize email
+      if (detectSqlInjection(adminEmail)) {
+        setMessage({ type: 'error', text: 'Invalid email format.' });
+        return;
+      }
+
+      const sanitizedAdminEmail = sanitizeTextInput(adminEmail.trim(), 254);
+
       // Use the new RPC function
       const { data, error } = await supabase.rpc('remove_admin', {
-        requester_email: adminData.email,
-        admin_to_remove_email: adminEmail
+        requester_email: sanitizeTextInput(adminData.email, 254),
+        admin_to_remove_email: sanitizedAdminEmail
       });
 
       if (error) {
