@@ -7,6 +7,40 @@ const corsHeaders = {
 // Global salt for password hashing (in production, use per-user salts)
 const GLOBAL_PASSWORD_SALT = 'exam_evaluator_salt_2024'
 
+// --- Input Validation Helpers ---
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+const SQL_INJECTION_PATTERNS = [
+  /(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|UNION|SCRIPT)\b)/i,
+  /(--|;\/\*|\*\/|xp_|sp_)/i,
+  /(UNION|OR|AND)\s+\d+\s*=\s*\d+/i
+]
+
+function isValidEmail(email: string): boolean {
+  return typeof email === 'string' && email.length <= 254 && EMAIL_REGEX.test(email)
+}
+
+function isValidUUID(id: string): boolean {
+  return typeof id === 'string' && UUID_REGEX.test(id)
+}
+
+function hasSqlInjection(input: string): boolean {
+  if (typeof input !== 'string') return false
+  return SQL_INJECTION_PATTERNS.some(pattern => pattern.test(input))
+}
+
+function sanitizeString(input: string, maxLength = 254): string {
+  if (typeof input !== 'string') return ''
+  return input.trim().slice(0, maxLength)
+}
+
+function validationError(message: string) {
+  return new Response(
+    JSON.stringify({ error: message }),
+    { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+  )
+}
+
 // Custom password hashing using Deno's built-in crypto
 async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder()
@@ -175,20 +209,23 @@ async function handleLogin(req: Request, supabaseAdmin: any) {
     const { email, password } = body
 
     if (!email || !password) {
-      return new Response(
-        JSON.stringify({ error: 'Email and password are required' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('Email and password are required')
+    }
+
+    // Validate and sanitize email
+    const sanitizedEmail = sanitizeString(email)
+    if (!isValidEmail(sanitizedEmail)) {
+      return validationError('Invalid email format')
+    }
+    if (hasSqlInjection(sanitizedEmail)) {
+      return validationError('Invalid email format')
     }
 
     // Query admin_users table to find user by email
     const { data: adminUser, error: queryError } = await supabaseAdmin
       .from('admin_users')
       .select('*')
-      .eq('email', email)
+      .eq('email', sanitizedEmail)
       .single()
 
     if (queryError || !adminUser) {
@@ -274,30 +311,31 @@ async function handleRegister(req: Request, supabaseAdmin: any) {
     const { email, password }: RegisterRequest = await req.json()
 
     if (!email || !password) {
-      return new Response(
-        JSON.stringify({ error: 'Email and password are required' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('Email and password are required')
+    }
+
+    // Validate and sanitize email
+    const sanitizedEmail = sanitizeString(email)
+    if (!isValidEmail(sanitizedEmail)) {
+      return validationError('Invalid email format')
+    }
+    if (hasSqlInjection(sanitizedEmail)) {
+      return validationError('Invalid email format')
     }
 
     if (password.length < 8) {
-      return new Response(
-        JSON.stringify({ error: 'Password must be at least 8 characters long' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('Password must be at least 8 characters long')
+    }
+
+    if (password.length > 128) {
+      return validationError('Password is too long')
     }
 
     // Check if admin already exists
     const { data: existingAdmin } = await supabaseAdmin
       .from('admin_users')
       .select('id')
-      .eq('email', email)
+      .eq('email', sanitizedEmail)
       .single()
 
     if (existingAdmin) {
@@ -317,7 +355,7 @@ async function handleRegister(req: Request, supabaseAdmin: any) {
     const { data: newAdmin, error: insertError } = await supabaseAdmin
       .from('admin_users')
       .insert({
-        email,
+        email: sanitizedEmail,
         password_hash: hashedPassword,
         is_default_admin: false
       })
@@ -511,20 +549,23 @@ async function handleAssignAdmin(req: Request, supabaseAdmin: any) {
     const { email, password }: AssignAdminRequest = await req.json()
 
     if (!email || !password) {
-      return new Response(
-        JSON.stringify({ error: 'Email and password are required' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('Email and password are required')
+    }
+
+    // Validate and sanitize email
+    const sanitizedEmail = sanitizeString(email)
+    if (!isValidEmail(sanitizedEmail)) {
+      return validationError('Invalid email format')
+    }
+    if (hasSqlInjection(sanitizedEmail)) {
+      return validationError('Invalid email format')
     }
 
     // Check if admin already exists
     const { data: existingAdmin } = await supabaseAdmin
       .from('admin_users')
       .select('id')
-      .eq('email', email)
+      .eq('email', sanitizedEmail)
       .single()
 
     if (existingAdmin) {
@@ -541,15 +582,15 @@ async function handleAssignAdmin(req: Request, supabaseAdmin: any) {
     const hashedPassword = await hashPassword(password)
 
     // Insert new admin
-    const { error: insertError } = await supabaseAdmin
+    const { error: assignInsertError } = await supabaseAdmin
       .from('admin_users')
       .insert({
-        email,
+        email: sanitizedEmail,
         password_hash: hashedPassword,
         is_default_admin: false
       })
 
-    if (insertError) throw insertError
+    if (assignInsertError) throw assignInsertError
 
     return new Response(
       JSON.stringify({ success: true }),
@@ -575,13 +616,18 @@ async function handleUpdateUserLimit(req: Request, supabaseAdmin: any) {
     const { userId, limit }: UserLimitRequest = await req.json()
 
     if (!userId || limit === undefined) {
-      return new Response(
-        JSON.stringify({ error: 'User ID and limit are required' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('User ID and limit are required')
+    }
+
+    // Validate userId format
+    if (!isValidUUID(userId)) {
+      return validationError('Invalid user ID format')
+    }
+
+    // Validate limit range
+    const numLimit = Number(limit)
+    if (isNaN(numLimit) || numLimit < 1 || numLimit > 10000) {
+      return validationError('Limit must be between 1 and 10000')
     }
 
     // Check if user limit record exists
@@ -636,13 +682,12 @@ async function handleUpdateUserLimit(req: Request, supabaseAdmin: any) {
 async function handleRemoveAdmin(adminId: string, supabaseAdmin: any) {
   try {
     if (!adminId) {
-      return new Response(
-        JSON.stringify({ error: 'Admin ID is required' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
+      return validationError('Admin ID is required')
+    }
+
+    // Validate adminId format
+    if (!isValidUUID(adminId)) {
+      return validationError('Invalid admin ID format')
     }
 
     // Check if admin exists and is not default admin
