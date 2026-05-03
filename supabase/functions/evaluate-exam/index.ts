@@ -56,10 +56,27 @@ Deno.serve(async (req) => {
 
     const { evaluationId, studentPaperFiles, markSchemeFiles, totalPossibleMarks, studentInfo, geminiApiKey, geminiModel }: EvaluationRequest = await req.json()
 
-    // Validate that API key is provided
-    if (!geminiApiKey) {
-      throw new Error('Gemini API key not provided. Please set your API key in the settings.')
+    // Input validation
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    if (!evaluationId || !UUID_REGEX.test(evaluationId)) {
+      throw new Error('Invalid evaluation ID format')
     }
+
+    if (!geminiApiKey || typeof geminiApiKey !== 'string' || geminiApiKey.length < 20 || geminiApiKey.length > 200) {
+      throw new Error('Gemini API key not provided or invalid. Please set your API key in the settings.')
+    }
+
+    if (!Array.isArray(studentPaperFiles) || studentPaperFiles.length === 0) {
+      throw new Error('Student paper files are required')
+    }
+
+    if (!Array.isArray(markSchemeFiles) || markSchemeFiles.length === 0) {
+      throw new Error('Mark scheme files are required')
+    }
+
+    // Validate model name against allowlist to prevent injection via API URL
+    const allowedModels = ['gemini-3-flash-preview', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-2.5-flash-preview-05-20']
+    const safeModel = allowedModels.includes(geminiModel || '') ? geminiModel : 'gemini-3-flash-preview'
 
     // Update evaluation status to processing
     await supabaseClient
@@ -88,7 +105,7 @@ Deno.serve(async (req) => {
       totalPossibleMarks, 
       studentInfo,
       geminiApiKey, 
-      geminiModel || 'gemini-3-flash-preview'
+      safeModel || 'gemini-3-flash-preview'
     )
 
     // Don't update the evaluation status to completed here - let the frontend do it after review
