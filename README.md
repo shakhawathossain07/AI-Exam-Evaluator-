@@ -144,7 +144,7 @@ This project will not function correctly unless the Supabase backend is properly
      style="max-width: 900px;" />
 
 <p>
-Crafted with passion and powered by <strong>Kiro AI</strong> to bring intelligent automation into modern education workflows. The completed code was later shared with team members. 
+Crafted with passion and powered by <strong>Kiro AI</strong> to bring intelligent automation into modern education workflows. 
 </p>
 
 </div>
