@@ -128,6 +128,12 @@ Contributions are always welcome. Feel free to open a Pull Request or browse the
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
+All work for this project was carried out independently by me. Although the project was shared with team members, they did not contribute to this repository.
+
+https://drive.google.com/file/d/1AhAT2H0ZxDuIb2K4GSIvZsVTzN3wbcBi/view?usp=sharing
+
+This project will not function correctly unless the Supabase backend is properly configured.
+
 <div align="center">
 
 ## ❤️ Made with Love using Kiro AI
@@ -138,7 +144,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
      style="max-width: 900px;" />
 
 <p>
-Crafted with passion and powered by <strong>Kiro AI</strong> to bring intelligent automation into modern education workflows.
+Crafted with passion and powered by <strong>Kiro AI</strong> to bring intelligent automation into modern education workflows. The completed code was later shared with team members. 
 </p>
 
 </div>
