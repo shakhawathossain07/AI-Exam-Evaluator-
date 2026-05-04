@@ -125,3 +125,19 @@ Contributions are always welcome. Feel free to open a Pull Request or browse the
 ## 📝 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+<div align="center">
+
+## ❤️ Made with Love using Kiro AI
+
+<img src="https://github.com/user-attachments/assets/82717063-e7ac-417c-9917-b2fd1f915451" 
+     alt="Amazon Kiro Logo" 
+     width="100%" 
+     style="max-width: 900px;" />
+
+<p>
+Crafted with passion and powered by <strong>Kiro AI</strong> to bring intelligent automation into modern education workflows.
+</p>
+
+</div>
+
