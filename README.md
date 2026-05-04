@@ -3,6 +3,7 @@
 This project has been developed with the assistance of **Kiro AI** and is released as **open-source software** under the **MIT License**.
 
 The codebase is **AI-generated and/or AI-assisted** and is **not the proprietary property of any individual or organization**. You are free to use, modify, distribute, and build upon this project in accordance with the terms of the MIT License. For additional context and validation, please refer to the **supervisor’s recommendation letter** provided below.
+Show Credential -> https://drive.google.com/file/d/1MfOTu77kCNmTyNK4Hy6DVV9ZghIZl08d/view?usp=drive_link
 
 
 <div align="center">
