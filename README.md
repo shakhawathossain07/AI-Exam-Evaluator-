@@ -29,6 +29,8 @@ A comprehensive platform mapping full-lifecycle evaluations—from straightforwa
 
 <img src="https://github.com/user-attachments/assets/fbb93ba9-e415-472c-98cd-62005a85a18e" width="100%"/>
 
+Show Credential -> https://drive.google.com/file/d/1MfOTu77kCNmTyNK4Hy6DVV9ZghIZl08d/view?usp=drive_link
+
 ## ✨ Key Features
 
 - **🤖 AI-Powered Evaluation**: Utilize Google Gemini AI (incl. `gemini-3-flash-preview` model) to scrutinize, score, and provide feedback on student answers based on answer keys mapped directly from our dashboard.
