@@ -1,3 +1,9 @@
+## 📌 Disclaimer
+
+This project has been developed with the assistance of **Kiro AI** and is released as **open-source software** under the **MIT License**.
+
+The codebase is **AI-generated and/or AI-assisted** and is **not the proprietary property of any individual or organization**. You are free to use, modify, distribute, and build upon this project in accordance with the terms of the MIT License.
+
 <div align="center">
 
    <img width="203" height="52" alt="image" src="https://github.com/user-attachments/assets/9ce8457f-9dee-41de-9e7f-bbd634941062" />
