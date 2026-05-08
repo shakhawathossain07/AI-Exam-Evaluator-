@@ -134,7 +134,7 @@ https://drive.google.com/file/d/1AhAT2H0ZxDuIb2K4GSIvZsVTzN3wbcBi/view?usp=shari
 
 <div align="center">
 
-## ❤️ Made with Love using Kiro AI
+## ❤️ Made with Love using Kiro
 
 <img src="https://github.com/user-attachments/assets/82717063-e7ac-417c-9917-b2fd1f915451" 
      alt="Amazon Kiro Logo" 
