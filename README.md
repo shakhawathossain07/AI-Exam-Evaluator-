@@ -1,6 +1,6 @@
 ## 📌 Disclaimer
 
-This project has been developed with the assistance of **Kiro AI** and is released as **open-source software** under the **MIT License**. This project will not function correctly unless the Supabase and edge functions are properly configured.
+This project has been developed with the assistance of **Kiro** and is released as **open-source software** under the **MIT License**. This project will not function correctly unless the Supabase and edge functions are properly configured.
 
 The codebase is **AI-generated and/or AI-assisted** and is **not the proprietary property of any individual or organization**. You are free to use, modify, distribute, and build upon this project in accordance with the terms of the MIT License. For additional context and validation, please refer to the **supervisor’s recommendation letter** provided below.
 
